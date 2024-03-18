@@ -9,19 +9,21 @@
 /* Begin PBXBuildFile section */
 		916FB5E02BA890B0001CB2F2 /* PeekApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 916FB5DF2BA890B0001CB2F2 /* PeekApp.swift */; };
 		916FB5E22BA890B0001CB2F2 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 916FB5E12BA890B0001CB2F2 /* ContentView.swift */; };
-		916FB5E42BA890B0001CB2F2 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 916FB5E32BA890B0001CB2F2 /* Item.swift */; };
+		916FB5E42BA890B0001CB2F2 /* TaskItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 916FB5E32BA890B0001CB2F2 /* TaskItem.swift */; };
 		916FB5E62BA890B1001CB2F2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 916FB5E52BA890B1001CB2F2 /* Assets.xcassets */; };
 		916FB5E92BA890B1001CB2F2 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 916FB5E82BA890B1001CB2F2 /* Preview Assets.xcassets */; };
+		91FF5D362BA8E9C700912C65 /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91FF5D352BA8E9C700912C65 /* UserData.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		916FB5DC2BA890B0001CB2F2 /* Peek.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Peek.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		916FB5DF2BA890B0001CB2F2 /* PeekApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeekApp.swift; sourceTree = "<group>"; };
 		916FB5E12BA890B0001CB2F2 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		916FB5E32BA890B0001CB2F2 /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
+		916FB5E32BA890B0001CB2F2 /* TaskItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskItem.swift; sourceTree = "<group>"; };
 		916FB5E52BA890B1001CB2F2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		916FB5E82BA890B1001CB2F2 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		916FB5EA2BA890B1001CB2F2 /* Peek.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Peek.entitlements; sourceTree = "<group>"; };
+		91FF5D352BA8E9C700912C65 /* UserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserData.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,7 +58,8 @@
 			children = (
 				916FB5DF2BA890B0001CB2F2 /* PeekApp.swift */,
 				916FB5E12BA890B0001CB2F2 /* ContentView.swift */,
-				916FB5E32BA890B0001CB2F2 /* Item.swift */,
+				916FB5E32BA890B0001CB2F2 /* TaskItem.swift */,
+				91FF5D352BA8E9C700912C65 /* UserData.swift */,
 				916FB5E52BA890B1001CB2F2 /* Assets.xcassets */,
 				916FB5EA2BA890B1001CB2F2 /* Peek.entitlements */,
 				916FB5E72BA890B1001CB2F2 /* Preview Content */,
@@ -88,6 +91,8 @@
 			dependencies = (
 			);
 			name = Peek;
+			packageProductDependencies = (
+			);
 			productName = Peek;
 			productReference = 916FB5DC2BA890B0001CB2F2 /* Peek.app */;
 			productType = "com.apple.product-type.application";
@@ -116,6 +121,8 @@
 				Base,
 			);
 			mainGroup = 916FB5D32BA890B0001CB2F2;
+			packageReferences = (
+			);
 			productRefGroup = 916FB5DD2BA890B0001CB2F2 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -143,7 +150,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				916FB5E22BA890B0001CB2F2 /* ContentView.swift in Sources */,
-				916FB5E42BA890B0001CB2F2 /* Item.swift in Sources */,
+				916FB5E42BA890B0001CB2F2 /* TaskItem.swift in Sources */,
+				91FF5D362BA8E9C700912C65 /* UserData.swift in Sources */,
 				916FB5E02BA890B0001CB2F2 /* PeekApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -283,6 +291,7 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_LSUIElement = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -311,6 +320,7 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_LSUIElement = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
