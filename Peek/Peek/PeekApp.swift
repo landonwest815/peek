@@ -27,7 +27,7 @@ struct PeekApp: App {
         MenuBarExtra {
             ContentView()
         } label: {
-            Image(systemName: "basketball")
+            Image(systemName: "pencil.and.outline")
         }
         .menuBarExtraStyle(.window)
     }

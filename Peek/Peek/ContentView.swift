@@ -51,15 +51,17 @@ struct ContentView: View {
                     
                     Text("3540 HW")
                         .strikethrough(isOn)
+                        .foregroundStyle(isOn ? .gray : .white)
                         .onTapGesture {
                             withAnimation {
                                 isOn.toggle()
                             }
                         }
                     
-                    
-                    
                     Spacer()
+                    
+                    Text("!!")
+
                 }
                 .padding(.vertical, 2.5)
                 
@@ -70,6 +72,7 @@ struct ContentView: View {
                     
                     Text("PHYS HW")
                         .strikethrough(isOn2)
+                        .foregroundStyle(isOn2 ? .gray : .white)
                         .onTapGesture {
                             withAnimation {
                                 isOn2.toggle()
@@ -160,7 +163,12 @@ struct ContentView: View {
             VStack(spacing: 10) {
                 
                 TextField("Any Tasks?", text: $textEntry)
-                    .textFieldStyle(.roundedBorder)
+                    .textFieldStyle(.plain)
+                    .padding(5)
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 5) // Set your desired corner radius
+                            .stroke(Color.gray.opacity(0.5), lineWidth: 1) // Set the border color and line width
+                    )
                 
                 Picker(selection: $selected, label: Image(systemName: "calendar")) {
                                 Text("M").tag(1)
