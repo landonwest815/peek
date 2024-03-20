@@ -390,6 +390,7 @@ struct ContentView: View {
                                 withAnimation {
                                     addTask()
                                 }
+                                textEntry = ""
                             }
                     }
                 }
