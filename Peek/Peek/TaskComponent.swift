@@ -48,6 +48,7 @@ struct TaskComponent: View {
                         .foregroundStyle(.gray)
                         .onTapGesture {
                             modelContext.delete(item)
+                            try? modelContext.save()
                         }
                 }
             }
@@ -56,7 +57,7 @@ struct TaskComponent: View {
             .transition(.opacity)
         }
         .frame(height: 35)
-        .background(.regularMaterial)
+        .background(Color(hex: item.taskColor.rawValue) ?? .clear)
         .cornerRadius(7.5)
         .overlay(
             RoundedRectangle(cornerRadius: 7.5, style: .circular).stroke(Color(.systemGray), lineWidth: 1)
@@ -68,7 +69,7 @@ struct TaskComponent: View {
     let config = ModelConfiguration(isStoredInMemoryOnly: true)
     let container = try! ModelContainer(for: TaskItem.self, UserData.self, configurations: config)
     
-    let task1 = TaskItem(taskName: "Take out trash", weekDay: .tuesday, importance: .level1, category: "Personal")
+    let task1 = TaskItem(taskName: "Take out trash", weekDay: .tuesday, importance: .level1, category: "Personal", taskColor: .blue)
     container.mainContext.insert(task1)
     
     return TaskComponent(item: task1)

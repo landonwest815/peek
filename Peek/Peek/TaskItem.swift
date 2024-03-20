@@ -22,18 +22,28 @@ enum ImportanceLevel: String, Codable {
     case level2 = "!!"
 }
 
+enum TaskColor: String, Codable {
+    case red = "eac4d5"
+    case green = "b8e0d2"
+    case blue = "809bce"
+    case noColor = "n/a"
+}
+
 @Model
-final class TaskItem {
+final class TaskItem: Identifiable {
+    var id = UUID()
     var taskName: String
     var weekDay: Weekday
     var importance: ImportanceLevel
     var category: String
     var completed: Bool = false
+    var taskColor: TaskColor
     
-    init(taskName: String, weekDay: Weekday, importance: ImportanceLevel, category: String) {
+    init(taskName: String, weekDay: Weekday, importance: ImportanceLevel, category: String, taskColor: TaskColor = .noColor) {
         self.taskName = taskName
         self.weekDay = weekDay
         self.importance = importance
         self.category = category
+        self.taskColor = taskColor
     }
 }

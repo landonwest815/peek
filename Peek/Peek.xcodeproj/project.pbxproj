@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		912742032BAB82F90077D1AD /* ColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 912742022BAB82F90077D1AD /* ColorExtension.swift */; };
 		915D60162BAB644D008F4090 /* TaskComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 915D60152BAB644D008F4090 /* TaskComponent.swift */; };
 		916FB5E02BA890B0001CB2F2 /* PeekApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 916FB5DF2BA890B0001CB2F2 /* PeekApp.swift */; };
 		916FB5E22BA890B0001CB2F2 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 916FB5E12BA890B0001CB2F2 /* ContentView.swift */; };
@@ -17,6 +18,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		912742022BAB82F90077D1AD /* ColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtension.swift; sourceTree = "<group>"; };
 		915D60152BAB644D008F4090 /* TaskComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskComponent.swift; sourceTree = "<group>"; };
 		916FB5DC2BA890B0001CB2F2 /* Peek.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Peek.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		916FB5DF2BA890B0001CB2F2 /* PeekApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeekApp.swift; sourceTree = "<group>"; };
@@ -42,6 +44,7 @@
 		916FB5D32BA890B0001CB2F2 = {
 			isa = PBXGroup;
 			children = (
+				912742022BAB82F90077D1AD /* ColorExtension.swift */,
 				916FB5DE2BA890B0001CB2F2 /* Peek */,
 				916FB5DD2BA890B0001CB2F2 /* Products */,
 			);
@@ -155,6 +158,7 @@
 				916FB5E22BA890B0001CB2F2 /* ContentView.swift in Sources */,
 				916FB5E42BA890B0001CB2F2 /* TaskItem.swift in Sources */,
 				915D60162BAB644D008F4090 /* TaskComponent.swift in Sources */,
+				912742032BAB82F90077D1AD /* ColorExtension.swift in Sources */,
 				91FF5D362BA8E9C700912C65 /* UserData.swift in Sources */,
 				916FB5E02BA890B0001CB2F2 /* PeekApp.swift in Sources */,
 			);
