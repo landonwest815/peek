@@ -87,6 +87,12 @@ struct ContentView: View {
                                 
                                 Text(item.importance.rawValue)
                                 
+                                Button {
+                                    modelContext.delete(item)
+                                } label: {
+                                    Image(systemName: "trash")
+                                        .foregroundStyle(.red)
+                                }
                             }
                             .padding(.vertical, 2.5)
                             .transition(.opacity)
@@ -136,6 +142,12 @@ struct ContentView: View {
                                 }
                                 
                                 Text(item.importance.rawValue)
+                                
+                                Image(systemName: "trash")
+                                        .foregroundStyle(.red)
+                                        .onTapGesture {
+                                            modelContext.delete(item)
+                                        }
                                 
                             }
                             .padding(.vertical, 2.5)
