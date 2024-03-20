@@ -47,266 +47,298 @@ struct ContentView: View {
                 
                 Divider()
                 
-                VStack {
-                    HStack {
-                        Text("Monday")
-                            .font(.headline)
-                            .fontWeight(.semibold)
-                        Spacer()
-                    }
-                    
-                    if mondayTasks.isEmpty {
-                        
+                HStack {
+                    VStack {
                         HStack {
-                            Text("Nothing planned for today!")
-                                .foregroundStyle(.gray)
+                            Text("Monday")
+                                .font(.headline)
+                                .fontWeight(.semibold)
                             Spacer()
                         }
-                        .padding(.vertical, 2.5)
-
-                    } else {
-                        ForEach(mondayTasks, id: \.self) { item in
+                        
+                        if mondayTasks.isEmpty {
                             
                             HStack {
-                                
-                                Text(item.taskName)
-                                    .strikethrough(item.completed)
-                                    .foregroundStyle(item.completed ? .gray : .white)
-                                    .onTapGesture {
-                                        withAnimation {
-                                            item.completed.toggle()
-                                        }
-                                    }
-                                
+                                Text("Nothing planned for today!")
+                                    .foregroundStyle(.gray)
                                 Spacer()
-                                
-                                if item.category != "N/A" {
-                                    Text(item.category)
-                                        .foregroundStyle(.gray)
-                                }
-                                
-                                Text(item.importance.rawValue)
-                                
-                                Button {
-                                    modelContext.delete(item)
-                                } label: {
-                                    Image(systemName: "trash")
-                                        .foregroundStyle(.red)
-                                }
                             }
                             .padding(.vertical, 2.5)
-                            .transition(.opacity)
                             
+                        } else {
+                            ForEach(mondayTasks, id: \.self) { item in
+                                
+                                HStack {
+                                    
+                                    Text(item.taskName)
+                                        .strikethrough(item.completed)
+                                        .foregroundStyle(item.completed ? .gray : .white)
+                                        .onTapGesture {
+                                            withAnimation {
+                                                item.completed.toggle()
+                                            }
+                                        }
+                                    
+                                    Spacer()
+                                    
+                                    if item.category != "N/A" {
+                                        Text(item.category)
+                                            .foregroundStyle(.gray)
+                                    }
+                                    
+                                    Text(item.importance.rawValue)
+                                    
+                                    Button {
+                                        modelContext.delete(item)
+                                    } label: {
+                                        Image(systemName: "trash")
+                                            .foregroundStyle(.gray)
+                                    }
+                                }
+                                .padding(.vertical, 2.5)
+                                .transition(.opacity)
+                                
+                            }
                         }
-                    }
-                }
-                
-                Divider()
-                
-                VStack {
-                    HStack {
-                        Text("Tuesday")
-                            .font(.headline)
-                            .fontWeight(.semibold)
                         Spacer()
                     }
+                    .frame(width: 150)
                     
-                    if tuesdayTasks.isEmpty {
-                        
+                    Divider()
+                    
+                    VStack {
                         HStack {
-                            Text("Nothing planned for today!")
-                                .foregroundStyle(.gray)
+                            Text("Tuesday")
+                                .font(.headline)
+                                .fontWeight(.semibold)
                             Spacer()
                         }
-                        .padding(.vertical, 2.5)
-
-                    } else {
-                        ForEach(tuesdayTasks, id: \.self) { item in
+                        
+                        if tuesdayTasks.isEmpty {
                             
                             HStack {
-                                
-                                Text(item.taskName)
-                                    .strikethrough(item.completed)
-                                    .foregroundStyle(item.completed ? .gray : .white)
-                                    .onTapGesture {
-                                        withAnimation {
-                                            item.completed.toggle()
-                                        }
-                                    }
-                                
+                                Text("Nothing planned for today!")
+                                    .foregroundStyle(.gray)
                                 Spacer()
+                            }
+                            .padding(.vertical, 2.5)
+                            
+                        } else {
+                            ForEach(tuesdayTasks, id: \.self) { item in
                                 
-                                if item.category != "N/A" {
-                                    Text(item.category)
+                                HStack {
+                                    
+                                    Text(item.taskName)
+                                        .strikethrough(item.completed)
+                                        .foregroundStyle(item.completed ? .gray : .white)
+                                        .onTapGesture {
+                                            withAnimation {
+                                                item.completed.toggle()
+                                            }
+                                        }
+                                    
+                                    Spacer()
+                                    
+                                    if item.category != "N/A" {
+                                        Text(item.category)
+                                            .foregroundStyle(.gray)
+                                    }
+                                    
+                                    Text(item.importance.rawValue)
+                                    
+                                    Image(systemName: "trash")
                                         .foregroundStyle(.gray)
-                                }
-                                
-                                Text(item.importance.rawValue)
-                                
-                                Image(systemName: "trash")
-                                        .foregroundStyle(.red)
                                         .onTapGesture {
                                             modelContext.delete(item)
                                         }
+                                        
+                                    
+                                }
+                                .padding(.vertical, 2.5)
+                                .transition(.opacity)
                                 
                             }
-                            .padding(.vertical, 2.5)
-                            .transition(.opacity)
-
                         }
-                    }
-                }
-                
-                Divider()
-                
-                VStack {
-                    HStack {
-                        Text("Wednesday")
-                            .font(.headline)
-                            .fontWeight(.semibold)
                         Spacer()
                     }
+                    .frame(width: 150)
                     
-                    if wednesdayTasks.isEmpty {
-                        
+                    Divider()
+                    
+                    VStack {
                         HStack {
-                            Text("Nothing planned for today!")
-                                .foregroundStyle(.gray)
+                            Text("Wednesday")
+                                .font(.headline)
+                                .fontWeight(.semibold)
                             Spacer()
                         }
-                        .padding(.vertical, 2.5)
-
-                    } else {
-                        ForEach(wednesdayTasks, id: \.self) { item in
+                        
+                        if wednesdayTasks.isEmpty {
                             
                             HStack {
-                                
-                                Text(item.taskName)
-                                    .strikethrough(item.completed)
-                                    .foregroundStyle(item.completed ? .gray : .white)
-                                    .onTapGesture {
-                                        withAnimation {
-                                            item.completed.toggle()
-                                        }
-                                    }
-                                
+                                Text("Nothing planned for today!")
+                                    .foregroundStyle(.gray)
                                 Spacer()
-                                
-                                if item.category != "N/A" {
-                                    Text(item.category)
-                                        .foregroundStyle(.gray)
-                                }
-                                
-                                Text(item.importance.rawValue)
-                                
                             }
                             .padding(.vertical, 2.5)
-                            .transition(.opacity)
-
+                            
+                        } else {
+                            ForEach(wednesdayTasks, id: \.self) { item in
+                                
+                                HStack {
+                                    
+                                    Text(item.taskName)
+                                        .strikethrough(item.completed)
+                                        .foregroundStyle(item.completed ? .gray : .white)
+                                        .onTapGesture {
+                                            withAnimation {
+                                                item.completed.toggle()
+                                            }
+                                        }
+                                    
+                                    Spacer()
+                                    
+                                    if item.category != "N/A" {
+                                        Text(item.category)
+                                            .foregroundStyle(.gray)
+                                    }
+                                    
+                                    Text(item.importance.rawValue)
+                                    
+                                    Image(systemName: "trash")
+                                        .foregroundStyle(.gray)
+                                        .onTapGesture {
+                                            modelContext.delete(item)
+                                        }
+                                    
+                                }
+                                .padding(.vertical, 2.5)
+                                .transition(.opacity)
+                                
+                            }
                         }
-                    }
-                }
-                
-                Divider()
-                
-                VStack {
-                    HStack {
-                        Text("Thursday")
-                            .font(.headline)
-                            .fontWeight(.semibold)
                         Spacer()
                     }
+                    .frame(width: 150)
                     
-                    if thursdayTasks.isEmpty {
-                        
+                    Divider()
+                    
+                    VStack {
                         HStack {
-                            Text("Nothing planned for today!")
-                                .foregroundStyle(.gray)
+                            Text("Thursday")
+                                .font(.headline)
+                                .fontWeight(.semibold)
                             Spacer()
                         }
-                        .padding(.vertical, 2.5)
-
-                    } else {
-                        ForEach(thursdayTasks, id: \.self) { item in
+                        
+                        if thursdayTasks.isEmpty {
                             
                             HStack {
-                                
-                                Text(item.taskName)
-                                    .strikethrough(item.completed)
-                                    .foregroundStyle(item.completed ? .gray : .white)
-                                    .onTapGesture {
-                                        withAnimation {
-                                            item.completed.toggle()
-                                        }
-                                    }
-                                
+                                Text("Nothing planned for today!")
+                                    .foregroundStyle(.gray)
                                 Spacer()
-                                
-                                if item.category != "N/A" {
-                                    Text(item.category)
-                                        .foregroundStyle(.gray)
-                                }
-                                
-                                Text(item.importance.rawValue)
-                                
                             }
                             .padding(.vertical, 2.5)
-                            .transition(.opacity)
-
+                            
+                        } else {
+                            ForEach(thursdayTasks, id: \.self) { item in
+                                
+                                HStack {
+                                    
+                                    Text(item.taskName)
+                                        .strikethrough(item.completed)
+                                        .foregroundStyle(item.completed ? .gray : .white)
+                                        .onTapGesture {
+                                            withAnimation {
+                                                item.completed.toggle()
+                                            }
+                                        }
+                                    
+                                    Spacer()
+                                    
+                                    if item.category != "N/A" {
+                                        Text(item.category)
+                                            .foregroundStyle(.gray)
+                                    }
+                                    
+                                    Text(item.importance.rawValue)
+                                    
+                                    Image(systemName: "trash")
+                                        .foregroundStyle(.gray)
+                                        .onTapGesture {
+                                            modelContext.delete(item)
+                                        }
+                                    
+                                }
+                                .padding(.vertical, 2.5)
+                                .transition(.opacity)
+                                
+                            }
                         }
-                    }
-                }
-                
-                Divider()
-                
-                VStack {
-                    HStack {
-                        Text("Friday")
-                            .font(.headline)
-                            .fontWeight(.semibold)
                         Spacer()
                     }
+                    .frame(width: 150)
                     
-                    if fridayTasks.isEmpty {
-                        
+                    Divider()
+                    
+                    VStack {
                         HStack {
-                            Text("Nothing planned for today!")
-                                .foregroundStyle(.gray)
+                            Text("Friday")
+                                .font(.headline)
+                                .fontWeight(.semibold)
                             Spacer()
                         }
-                        .padding(.vertical, 2.5)
-
-                    } else {
-                        ForEach(fridayTasks, id: \.self) { item in
+                        
+                        if fridayTasks.isEmpty {
                             
                             HStack {
-                                
-                                Text(item.taskName)
-                                    .strikethrough(item.completed)
-                                    .foregroundStyle(item.completed ? .gray : .white)
-                                    .onTapGesture {
-                                        withAnimation {
-                                            item.completed.toggle()
-                                        }
-                                    }
-                                
+                                Text("Nothing planned for today!")
+                                    .foregroundStyle(.gray)
                                 Spacer()
-                                
-                                if item.category != "N/A" {
-                                    Text(item.category)
-                                        .foregroundStyle(.gray)
-                                }
-                                
-                                Text(item.importance.rawValue)
-                                
                             }
                             .padding(.vertical, 2.5)
-                            .transition(.opacity)
-
+                            
+                        } else {
+                            ForEach(fridayTasks, id: \.self) { item in
+                                
+                                HStack {
+                                    
+                                    Text(item.taskName)
+                                        .strikethrough(item.completed)
+                                        .foregroundStyle(item.completed ? .gray : .white)
+                                        .onTapGesture {
+                                            withAnimation {
+                                                item.completed.toggle()
+                                            }
+                                        }
+                                    
+                                    Spacer()
+                                    
+                                    if item.category != "N/A" {
+                                        Text(item.category)
+                                            .foregroundStyle(.gray)
+                                    }
+                                    
+                                    Text(item.importance.rawValue)
+                                    
+                                    Image(systemName: "trash")
+                                        .foregroundStyle(.gray)
+                                        .onTapGesture {
+                                            modelContext.delete(item)
+                                        }
+                                    
+                                }
+                                .padding(.vertical, 2.5)
+                                .transition(.opacity)
+                                
+                            }
                         }
+                        Spacer()
                     }
+                    .frame(width: 150)
+                    
                 }
-                
+                    
                 Divider()
                 
                 VStack(spacing: 10) {
@@ -321,6 +353,7 @@ struct ContentView: View {
                         .labelsHidden()
                         .pickerStyle(.segmented)
                     
+                    HStack {
                         Picker("", selection: $selectedCategory) {
                             ForEach(userDataArray.first?.categories ?? ["N/A"], id: \.self) {
                                 Text($0)
@@ -328,15 +361,16 @@ struct ContentView: View {
                         }
                         .labelsHidden()
                         .pickerStyle(.segmented)
-                    
-                    
-                    Picker(selection: $importance, label: Text("")) {
-                        Text("N/A").tag(ImportanceLevel.level0)
-                        Text("!").tag(ImportanceLevel.level1)
-                        Text("!!").tag(ImportanceLevel.level2)
+                        
+                        
+                        Picker(selection: $importance, label: Text("")) {
+                            Text("N/A").tag(ImportanceLevel.level0)
+                            Text("!").tag(ImportanceLevel.level1)
+                            Text("!!").tag(ImportanceLevel.level2)
+                        }
+                        .labelsHidden()
+                        .pickerStyle(.segmented)
                     }
-                    .labelsHidden()
-                    .pickerStyle(.segmented)
                     
                     TextField("Any Tasks?", text: $textEntry)
                         .textFieldStyle(.plain)
@@ -346,6 +380,7 @@ struct ContentView: View {
                                 .stroke(Color.gray.opacity(0.5), lineWidth: 1) // Set the border color and line width
                         )
                         .padding(.vertical, 5)
+                        .frame(width: 500)
                         .onSubmit {
                             withAnimation {
                                 addTask()
@@ -405,8 +440,8 @@ struct ContentView: View {
 //    let data = UserData()
 //    container.mainContext.insert(data)
     
-    let task1 = TaskItem(taskName: "Take out trash", weekDay: .tuesday, importance: .level1, category: "Personal")
-    container.mainContext.insert(task1)
+    //let task1 = TaskItem(taskName: "Take out trash", weekDay: .tuesday, importance: .level1, category: "Personal")
+    //container.mainContext.insert(task1)
 
     return ContentView()
            .modelContainer(container)
