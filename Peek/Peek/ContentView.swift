@@ -68,35 +68,7 @@ struct ContentView: View {
                         } else {
                             ForEach(mondayTasks, id: \.self) { item in
                                 
-                                HStack {
-                                    
-                                    Text(item.taskName)
-                                        .strikethrough(item.completed)
-                                        .foregroundStyle(item.completed ? .gray : .white)
-                                        .onTapGesture {
-                                            withAnimation {
-                                                item.completed.toggle()
-                                            }
-                                        }
-                                    
-                                    Spacer()
-                                    
-                                    if item.category != "N/A" {
-                                        Text(item.category)
-                                            .foregroundStyle(.gray)
-                                    }
-                                    
-                                    Text(item.importance.rawValue)
-                                    
-                                    Button {
-                                        modelContext.delete(item)
-                                    } label: {
-                                        Image(systemName: "trash")
-                                            .foregroundStyle(.gray)
-                                    }
-                                }
-                                .padding(.vertical, 2.5)
-                                .transition(.opacity)
+                                TaskComponent(item: item)
                                 
                             }
                         }
@@ -126,36 +98,7 @@ struct ContentView: View {
                         } else {
                             ForEach(tuesdayTasks, id: \.self) { item in
                                 
-                                HStack {
-                                    
-                                    Text(item.taskName)
-                                        .strikethrough(item.completed)
-                                        .foregroundStyle(item.completed ? .gray : .white)
-                                        .onTapGesture {
-                                            withAnimation {
-                                                item.completed.toggle()
-                                            }
-                                        }
-                                    
-                                    Spacer()
-                                    
-                                    if item.category != "N/A" {
-                                        Text(item.category)
-                                            .foregroundStyle(.gray)
-                                    }
-                                    
-                                    Text(item.importance.rawValue)
-                                    
-                                    Image(systemName: "trash")
-                                        .foregroundStyle(.gray)
-                                        .onTapGesture {
-                                            modelContext.delete(item)
-                                        }
-                                        
-                                    
-                                }
-                                .padding(.vertical, 2.5)
-                                .transition(.opacity)
+                                TaskComponent(item: item)
                                 
                             }
                         }
@@ -185,35 +128,7 @@ struct ContentView: View {
                         } else {
                             ForEach(wednesdayTasks, id: \.self) { item in
                                 
-                                HStack {
-                                    
-                                    Text(item.taskName)
-                                        .strikethrough(item.completed)
-                                        .foregroundStyle(item.completed ? .gray : .white)
-                                        .onTapGesture {
-                                            withAnimation {
-                                                item.completed.toggle()
-                                            }
-                                        }
-                                    
-                                    Spacer()
-                                    
-                                    if item.category != "N/A" {
-                                        Text(item.category)
-                                            .foregroundStyle(.gray)
-                                    }
-                                    
-                                    Text(item.importance.rawValue)
-                                    
-                                    Image(systemName: "trash")
-                                        .foregroundStyle(.gray)
-                                        .onTapGesture {
-                                            modelContext.delete(item)
-                                        }
-                                    
-                                }
-                                .padding(.vertical, 2.5)
-                                .transition(.opacity)
+                                TaskComponent(item: item)
                                 
                             }
                         }
@@ -243,35 +158,7 @@ struct ContentView: View {
                         } else {
                             ForEach(thursdayTasks, id: \.self) { item in
                                 
-                                HStack {
-                                    
-                                    Text(item.taskName)
-                                        .strikethrough(item.completed)
-                                        .foregroundStyle(item.completed ? .gray : .white)
-                                        .onTapGesture {
-                                            withAnimation {
-                                                item.completed.toggle()
-                                            }
-                                        }
-                                    
-                                    Spacer()
-                                    
-                                    if item.category != "N/A" {
-                                        Text(item.category)
-                                            .foregroundStyle(.gray)
-                                    }
-                                    
-                                    Text(item.importance.rawValue)
-                                    
-                                    Image(systemName: "trash")
-                                        .foregroundStyle(.gray)
-                                        .onTapGesture {
-                                            modelContext.delete(item)
-                                        }
-                                    
-                                }
-                                .padding(.vertical, 2.5)
-                                .transition(.opacity)
+                                TaskComponent(item: item)
                                 
                             }
                         }
@@ -301,35 +188,7 @@ struct ContentView: View {
                         } else {
                             ForEach(fridayTasks, id: \.self) { item in
                                 
-                                HStack {
-                                    
-                                    Text(item.taskName)
-                                        .strikethrough(item.completed)
-                                        .foregroundStyle(item.completed ? .gray : .white)
-                                        .onTapGesture {
-                                            withAnimation {
-                                                item.completed.toggle()
-                                            }
-                                        }
-                                    
-                                    Spacer()
-                                    
-                                    if item.category != "N/A" {
-                                        Text(item.category)
-                                            .foregroundStyle(.gray)
-                                    }
-                                    
-                                    Text(item.importance.rawValue)
-                                    
-                                    Image(systemName: "trash")
-                                        .foregroundStyle(.gray)
-                                        .onTapGesture {
-                                            modelContext.delete(item)
-                                        }
-                                    
-                                }
-                                .padding(.vertical, 2.5)
-                                .transition(.opacity)
+                                TaskComponent(item: item)
                                 
                             }
                         }
@@ -445,11 +304,11 @@ struct ContentView: View {
     let config = ModelConfiguration(isStoredInMemoryOnly: true)
     let container = try! ModelContainer(for: TaskItem.self, UserData.self, configurations: config)
     
-//    let data = UserData()
-//    container.mainContext.insert(data)
+    let data = UserData()
+    container.mainContext.insert(data)
     
-    //let task1 = TaskItem(taskName: "Take out trash", weekDay: .tuesday, importance: .level1, category: "Personal")
-    //container.mainContext.insert(task1)
+    let task1 = TaskItem(taskName: "Take out trash", weekDay: .tuesday, importance: .level1, category: "Personal")
+    container.mainContext.insert(task1)
 
     return ContentView()
            .modelContainer(container)

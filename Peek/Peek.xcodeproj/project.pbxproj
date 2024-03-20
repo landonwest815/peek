@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		915D60162BAB644D008F4090 /* TaskComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 915D60152BAB644D008F4090 /* TaskComponent.swift */; };
 		916FB5E02BA890B0001CB2F2 /* PeekApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 916FB5DF2BA890B0001CB2F2 /* PeekApp.swift */; };
 		916FB5E22BA890B0001CB2F2 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 916FB5E12BA890B0001CB2F2 /* ContentView.swift */; };
 		916FB5E42BA890B0001CB2F2 /* TaskItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 916FB5E32BA890B0001CB2F2 /* TaskItem.swift */; };
@@ -16,6 +17,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		915D60152BAB644D008F4090 /* TaskComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskComponent.swift; sourceTree = "<group>"; };
 		916FB5DC2BA890B0001CB2F2 /* Peek.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Peek.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		916FB5DF2BA890B0001CB2F2 /* PeekApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeekApp.swift; sourceTree = "<group>"; };
 		916FB5E12BA890B0001CB2F2 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -63,6 +65,7 @@
 				916FB5E52BA890B1001CB2F2 /* Assets.xcassets */,
 				916FB5EA2BA890B1001CB2F2 /* Peek.entitlements */,
 				916FB5E72BA890B1001CB2F2 /* Preview Content */,
+				915D60152BAB644D008F4090 /* TaskComponent.swift */,
 			);
 			path = Peek;
 			sourceTree = "<group>";
@@ -151,6 +154,7 @@
 			files = (
 				916FB5E22BA890B0001CB2F2 /* ContentView.swift in Sources */,
 				916FB5E42BA890B0001CB2F2 /* TaskItem.swift in Sources */,
+				915D60162BAB644D008F4090 /* TaskComponent.swift in Sources */,
 				91FF5D362BA8E9C700912C65 /* UserData.swift in Sources */,
 				916FB5E02BA890B0001CB2F2 /* PeekApp.swift in Sources */,
 			);
