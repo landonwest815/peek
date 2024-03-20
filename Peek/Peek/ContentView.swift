@@ -400,6 +400,7 @@ struct ContentView: View {
             .padding(.vertical, 10)
             .padding(.horizontal)
         }
+        .background(.thinMaterial)
         .onAppear() {
 //            do {
 //                try modelContext.delete(model: UserData.self)
