@@ -342,7 +342,9 @@ struct ContentView: View {
                 Divider()
                 
                 VStack(spacing: 10) {
-                                        
+                                    
+                    
+                    
                         Picker(selection: $selected, label: Text("")) {
                             Text("M").tag(Weekday.monday)
                             Text("T").tag(Weekday.tuesday)
@@ -360,7 +362,9 @@ struct ContentView: View {
                             }
                         }
                         .labelsHidden()
-                        .pickerStyle(.segmented)
+                        .pickerStyle(.menu)
+                        .tint(.gray)
+                        .frame(width: 100)
                         
                         
                         Picker(selection: $importance, label: Text("")) {
@@ -369,23 +373,25 @@ struct ContentView: View {
                             Text("!!").tag(ImportanceLevel.level2)
                         }
                         .labelsHidden()
-                        .pickerStyle(.segmented)
-                    }
-                    
-                    TextField("Any Tasks?", text: $textEntry)
-                        .textFieldStyle(.plain)
-                        .padding(5)
-                        .overlay(
-                            RoundedRectangle(cornerRadius: 5) // Set your desired corner radius
-                                .stroke(Color.gray.opacity(0.5), lineWidth: 1) // Set the border color and line width
-                        )
-                        .padding(.vertical, 5)
-                        .frame(width: 500)
-                        .onSubmit {
-                            withAnimation {
-                                addTask()
+                        .pickerStyle(.menu)
+                        .tint(.gray)
+                        .frame(width: 100)
+                        
+                        
+                        TextField(" Any Tasks?", text: $textEntry)
+                            .textFieldStyle(.plain)
+                            .padding(2.5)
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 5) // Set your desired corner radius
+                                    .stroke(Color.gray.opacity(0.5), lineWidth: 1) // Set the border color and line width
+                            )
+                            .padding(.leading, 15)
+                            .onSubmit {
+                                withAnimation {
+                                    addTask()
+                                }
                             }
-                        }
+                    }
                 }
                 .padding(.top, 5)
                 
