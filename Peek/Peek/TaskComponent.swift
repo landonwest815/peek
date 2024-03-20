@@ -56,7 +56,7 @@ struct TaskComponent: View {
             .transition(.opacity)
         }
         .frame(height: 35)
-        .background(.thickMaterial)
+        .background(.regularMaterial)
         .cornerRadius(7.5)
         .overlay(
             RoundedRectangle(cornerRadius: 7.5, style: .circular).stroke(Color(.systemGray), lineWidth: 1)

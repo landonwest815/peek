@@ -201,19 +201,17 @@ struct ContentView: View {
                 Divider()
                 
                 VStack(spacing: 10) {
+                                
+                    Picker(selection: $selected, label: Text("")) {
+                        Text("M").tag(Weekday.monday)
+                        Text("T").tag(Weekday.tuesday)
+                        Text("W").tag(Weekday.wednesday)
+                        Text("Th").tag(Weekday.thursday)
+                        Text("F").tag(Weekday.friday)
+                    }
+                    .labelsHidden()
+                    .pickerStyle(.segmented)
                                     
-                    
-                    
-                        Picker(selection: $selected, label: Text("")) {
-                            Text("M").tag(Weekday.monday)
-                            Text("T").tag(Weekday.tuesday)
-                            Text("W").tag(Weekday.wednesday)
-                            Text("Th").tag(Weekday.thursday)
-                            Text("F").tag(Weekday.friday)
-                        }
-                        .labelsHidden()
-                        .pickerStyle(.segmented)
-                    
                     HStack {
                         Picker("", selection: $selectedCategory) {
                             ForEach(userDataArray.first?.categories ?? ["N/A"], id: \.self) {
@@ -304,11 +302,11 @@ struct ContentView: View {
     let config = ModelConfiguration(isStoredInMemoryOnly: true)
     let container = try! ModelContainer(for: TaskItem.self, UserData.self, configurations: config)
     
-    let data = UserData()
-    container.mainContext.insert(data)
-    
-    let task1 = TaskItem(taskName: "Take out trash", weekDay: .tuesday, importance: .level1, category: "Personal")
-    container.mainContext.insert(task1)
+//    let data = UserData()
+//    container.mainContext.insert(data)
+//    
+//    let task1 = TaskItem(taskName: "Take out trash", weekDay: .tuesday, importance: .level1, category: "Personal")
+//    container.mainContext.insert(task1)
 
     return ContentView()
            .modelContainer(container)
