@@ -359,6 +359,11 @@ struct ContentView: View {
         //.frame(height: 700)
     }
     
+    func deleteItem(item: TaskItem) {
+        modelContext.delete(item)
+        try? modelContext.save()
+    }
+    
     func countCompletedTasks() -> Int {
         let completedTasks = taskItems.filter { $0.completed == true }
         return completedTasks.count

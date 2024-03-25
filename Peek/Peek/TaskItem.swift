@@ -31,7 +31,12 @@ enum TaskColor: String, Codable {
 }
 
 @Model
-final class TaskItem: Identifiable {
+final class TaskItem: Identifiable, Codable {
+    
+    enum CodingKeys: CodingKey {
+            case id, taskName, weekDay, importance, category, completed, taskColor
+        }
+    
     var id = UUID()
     var taskName: String
     var weekDay: Weekday
@@ -47,4 +52,26 @@ final class TaskItem: Identifiable {
         self.category = category
         self.taskColor = taskColor
     }
+    
+    required init(from decoder: Decoder) throws {
+            let container = try decoder.container(keyedBy: CodingKeys.self)
+            id = try container.decode(UUID.self, forKey: .id)
+            taskName = try container.decode(String.self, forKey: .taskName)
+            weekDay = try container.decode(Weekday.self, forKey: .weekDay)
+            importance = try container.decode(ImportanceLevel.self, forKey: .importance)
+            category = try container.decode(String.self, forKey: .category)
+            completed = try container.decode(Bool.self, forKey: .completed)
+            taskColor = try container.decode(TaskColor.self, forKey: .taskColor)
+        }
+    
+    func encode(to encoder: Encoder) throws {
+            var container = encoder.container(keyedBy: CodingKeys.self)
+            try container.encode(id, forKey: .id)
+            try container.encode(taskName, forKey: .taskName)
+            try container.encode(weekDay, forKey: .weekDay)
+            try container.encode(importance, forKey: .importance)
+            try container.encode(category, forKey: .category)
+            try container.encode(completed, forKey: .completed)
+            try container.encode(taskColor, forKey: .taskColor)
+        }
 }

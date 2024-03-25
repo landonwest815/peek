@@ -7,11 +7,13 @@
 
 import SwiftUI
 import SwiftData
+import UniformTypeIdentifiers
 
-struct TaskComponent: View {
+struct TaskComponent: View, Codable, Transferable {
     
+    var id = UUID()
     
-    @Environment(\.modelContext) private var modelContext
+   @Environment(\.modelContext) private var modelContext
 
     
     //var width: CGFloat
@@ -19,6 +21,10 @@ struct TaskComponent: View {
     //var contents: String
     
     var item: TaskItem
+
+    static var transferRepresentation: some TransferRepresentation {
+        CodableRepresentation(contentType: .taskComponent)
+    }
     
     var body: some View {
         VStack(spacing: 0) {
@@ -64,6 +70,15 @@ struct TaskComponent: View {
         )
         .opacity(item.completed ? 0.5 : 1.0)
     }
+    
+    func deleteItem(item: TaskItem) {
+        @Environment(\.modelContext) var modelContext
+        
+    }
+}
+
+extension UTType {
+    static let taskComponent = UTType(exportedAs: "co.landonwest.taskComponent")
 }
 
 #Preview {
