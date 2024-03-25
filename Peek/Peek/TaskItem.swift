@@ -26,6 +26,7 @@ enum TaskColor: String, Codable {
     case red = "eac4d5"
     case green = "b8e0d2"
     case blue = "809bce"
+    case purple = "8c80ce"
     case noColor = "n/a"
 }
 

@@ -24,12 +24,16 @@ struct ContentView: View {
     @State var selectedColor: TaskColor = .noColor
     let colors: [TaskColor] = [
         TaskColor.red,
-        TaskColor.blue,
         TaskColor.green,
+        TaskColor.blue,
+        TaskColor.purple,
     ]
     
-    var importances = ["N/A", "!", "!!"]
     @State private var importance = ImportanceLevel.level0
+    var importances = [
+        ImportanceLevel.level1,
+        ImportanceLevel.level2,
+    ]
 
     var body: some View {
         
@@ -47,7 +51,7 @@ struct ContentView: View {
                     
                     Spacer()
                     
-                    Text("0/2")
+                    Text("\(countCompletedTasks()) / \(taskItems.count)")
                         .font(.headline)
                         .fontWeight(.semibold)
                 }
@@ -256,15 +260,40 @@ struct ContentView: View {
                         .pickerStyle(.segmented)
                         .frame(width: 175)
                         
-                        Picker(selection: $importance, label: Text("")) {
-                            Text("N/A").tag(ImportanceLevel.level0)
-                            Text("!").tag(ImportanceLevel.level1)
-                            Text("!!").tag(ImportanceLevel.level2)
+//                        Picker(selection: $importance, label: Text("")) {
+//                            Text("N/A").tag(ImportanceLevel.level0)
+//                            Text("!").tag(ImportanceLevel.level1)
+//                            Text("!!").tag(ImportanceLevel.level2)
+//                        }
+//                        .labelsHidden()
+//                        .pickerStyle(.segmented)
+//                        .tint(.gray)
+//                        .frame(width: 105)
+                        
+                        HStack(spacing: 10) {
+                            ForEach(importances, id: \.self) { importance in
+                                Button(action: {
+                                    if self.importance.rawValue == importance.rawValue {
+                                        self.importance = .level0
+                                    } else {
+                                        self.importance = importance
+                                    }
+                                }) {
+                                    ZStack {
+                                        Circle()
+                                            .fill(Color(.darkGray).opacity(0.7))
+                                            .frame(width: 20, height: 20)
+                                            .overlay(
+                                                Circle()
+                                                    .stroke(Color.white, lineWidth: self.importance == importance ? 3 : 0)
+                                            )
+                                        Text(importance.rawValue)
+                                            .foregroundStyle(.white)
+                                    }
+                                }
+                                .buttonBorderShape(.circle)
+                            }
                         }
-                        .labelsHidden()
-                        .pickerStyle(.segmented)
-                        .tint(.gray)
-                        .frame(width: 105)
                         
                         
                         TextField(" Any Tasks?", text: $textEntry)
@@ -303,8 +332,36 @@ struct ContentView: View {
 //            
 //            let data = UserData()
 //            modelContext.insert(data)
+            
+            selectedColor = .noColor
+            importance = .level0
+            
+            let currentDate = Date()
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "EEEE" // Returns the full name of the weekday
+            let weekday = dateFormatter.string(from: currentDate)
+
+            switch weekday {
+                case "Monday":
+                    selected = .monday
+                case "Tuesday":
+                    selected = .tuesday
+                case "Wednesday":
+                    selected = .wednesday
+                case "Thursday":
+                    selected = .thursday
+                case "Friday":
+                    selected = .friday
+                default:
+                    selected = .monday
+            }
         }
         //.frame(height: 700)
+    }
+    
+    func countCompletedTasks() -> Int {
+        let completedTasks = taskItems.filter { $0.completed == true }
+        return completedTasks.count
     }
     
     func addTask() {
