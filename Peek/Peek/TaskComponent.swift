@@ -9,7 +9,7 @@ import SwiftUI
 import SwiftData
 import UniformTypeIdentifiers
 
-struct TaskComponent: View, Codable, Transferable {
+struct TaskComponent: View/*, Codable, Transferable*/ {
     
     var id = UUID()
     
@@ -22,9 +22,9 @@ struct TaskComponent: View, Codable, Transferable {
     
     var item: TaskItem
 
-    static var transferRepresentation: some TransferRepresentation {
-        CodableRepresentation(contentType: .taskComponent)
-    }
+//    static var transferRepresentation: some TransferRepresentation {
+//        CodableRepresentation(contentType: .taskComponent)
+//    }
     
     var body: some View {
         VStack(spacing: 0) {
@@ -68,7 +68,7 @@ struct TaskComponent: View, Codable, Transferable {
         .overlay(
             RoundedRectangle(cornerRadius: 7.5, style: .circular).stroke(Color(.white), lineWidth: 1)
         )
-        .opacity(item.completed ? 0.5 : 1.0)
+        .opacity(item.completed ? 0.33 : 1.0)
     }
     
     func deleteItem(item: TaskItem) {

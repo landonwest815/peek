@@ -18,6 +18,8 @@ struct ContentView: View {
     
     @State private var textEntry: String = ""
     @State private var selected = Weekday.monday
+    @State private var currentDay = Weekday.none
+
     
     @State private var selectedCategory = "N/A"
     
@@ -51,7 +53,11 @@ struct ContentView: View {
                     
                     Spacer()
                     
-                    Text("\(countCompletedTasks()) / \(taskItems.count)")
+                    Text(taskItems.count == 0 ? "" : "\(Double(countCompletedTasks()) / Double(taskItems.count) * 100, specifier: "%.0f")%")
+                        .font(.headline)
+                        .fontWeight(.semibold)
+                    
+                    Text(taskItems.count == 0 ? "" : "\(countCompletedTasks()) / \(taskItems.count)")
                         .font(.headline)
                         .fontWeight(.semibold)
                 }
@@ -64,6 +70,11 @@ struct ContentView: View {
                             Text("Monday")
                                 .font(.headline)
                                 .fontWeight(.semibold)
+                            if (currentDay == .monday) {
+                                Image(systemName: "arrowtriangle.backward.fill")
+                                    .resizable()
+                                    .frame(width: 7, height: 10)
+                            }
                             Spacer()
                         }
                         
@@ -95,6 +106,11 @@ struct ContentView: View {
                             Text("Tuesday")
                                 .font(.headline)
                                 .fontWeight(.semibold)
+                            if (currentDay == .tuesday) {
+                                Image(systemName: "arrowtriangle.backward.fill")
+                                    .resizable()
+                                    .frame(width: 7, height: 10)
+                            }
                             Spacer()
                         }
                         
@@ -126,6 +142,11 @@ struct ContentView: View {
                             Text("Wednesday")
                                 .font(.headline)
                                 .fontWeight(.semibold)
+                            if (currentDay == .wednesday) {
+                                Image(systemName: "arrowtriangle.backward.fill")
+                                    .resizable()
+                                    .frame(width: 7, height: 10)
+                            }
                             Spacer()
                         }
                         
@@ -157,6 +178,11 @@ struct ContentView: View {
                             Text("Thursday")
                                 .font(.headline)
                                 .fontWeight(.semibold)
+                            if (currentDay == .thursday) {
+                                Image(systemName: "arrowtriangle.backward.fill")
+                                    .resizable()
+                                    .frame(width: 7, height: 10)
+                            }
                             Spacer()
                         }
                         
@@ -188,6 +214,11 @@ struct ContentView: View {
                             Text("Friday")
                                 .font(.headline)
                                 .fontWeight(.semibold)
+                            if (currentDay == .friday) {
+                                Image(systemName: "arrowtriangle.backward.fill")
+                                    .resizable()
+                                    .frame(width: 7, height: 10)
+                            }
                             Spacer()
                         }
                         
@@ -344,16 +375,22 @@ struct ContentView: View {
             switch weekday {
                 case "Monday":
                     selected = .monday
+                    currentDay = .monday
                 case "Tuesday":
                     selected = .tuesday
+                    currentDay = .tuesday
                 case "Wednesday":
                     selected = .wednesday
+                    currentDay = .wednesday
                 case "Thursday":
                     selected = .thursday
+                    currentDay = .thursday
                 case "Friday":
                     selected = .friday
+                    currentDay = .friday
                 default:
                     selected = .monday
+                    currentDay = .none
             }
         }
         //.frame(height: 700)
