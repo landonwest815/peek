@@ -65,6 +65,7 @@ struct ContentView: View {
                 Divider()
                 
                 HStack {
+                    
                     VStack {
                         HStack {
                             Text("Monday")
@@ -87,17 +88,26 @@ struct ContentView: View {
                             }
                             .padding(.vertical, 2.5)
                             
+                        } else {
+                            ForEach(mondayTasks, id: \.self) { item in
+                                
+                                TaskComponent(item: item)
+                                    .draggable(item.id.uuidString)
+                                
+                            }
                         }
-                        
-                        ForEach(mondayTasks) { item in
-                            
-                            TaskComponent(item: item)
-                        }
-                        
                         Spacer()
                     }
                     .frame(width: 150)
                     .animation(.spring, value: mondayTasks)
+                    .dropDestination(for: String.self) { droppedTasks, location in
+                        for task in droppedTasks {
+                            taskItems.first(where: { $0.id.uuidString == task })?.weekDay = .monday
+                        }
+                        
+                        return true
+                    }
+                        
                     
                     Divider()
                     
@@ -127,6 +137,7 @@ struct ContentView: View {
                             ForEach(tuesdayTasks, id: \.self) { item in
                                 
                                 TaskComponent(item: item)
+                                    .draggable(item.id.uuidString)
                                 
                             }
                         }
@@ -134,6 +145,13 @@ struct ContentView: View {
                     }
                     .frame(width: 150)
                     .animation(.spring, value: tuesdayTasks)
+                    .dropDestination(for: String.self) { droppedTasks, location in
+                        for task in droppedTasks {
+                            taskItems.first(where: { $0.id.uuidString == task })?.weekDay = .tuesday
+                        }
+                        
+                        return true
+                    }
                     
                     Divider()
                     
@@ -163,6 +181,7 @@ struct ContentView: View {
                             ForEach(wednesdayTasks, id: \.self) { item in
                                 
                                 TaskComponent(item: item)
+                                    .draggable(item.id.uuidString)
                                 
                             }
                         }
@@ -170,6 +189,13 @@ struct ContentView: View {
                     }
                     .frame(width: 150)
                     .animation(.spring, value: wednesdayTasks)
+                    .dropDestination(for: String.self) { droppedTasks, location in
+                        for task in droppedTasks {
+                            taskItems.first(where: { $0.id.uuidString == task })?.weekDay = .wednesday
+                        }
+                        
+                        return true
+                    }
                     
                     Divider()
                     
@@ -199,6 +225,7 @@ struct ContentView: View {
                             ForEach(thursdayTasks, id: \.self) { item in
                                 
                                 TaskComponent(item: item)
+                                    .draggable(item.id.uuidString)
                                 
                             }
                         }
@@ -206,6 +233,13 @@ struct ContentView: View {
                     }
                     .frame(width: 150)
                     .animation(.spring, value: thursdayTasks)
+                    .dropDestination(for: String.self) { droppedTasks, location in
+                        for task in droppedTasks {
+                            taskItems.first(where: { $0.id.uuidString == task })?.weekDay = .thursday
+                        }
+                        
+                        return true
+                    }
                     
                     Divider()
                     
@@ -235,6 +269,7 @@ struct ContentView: View {
                             ForEach(fridayTasks, id: \.self) { item in
                                 
                                 TaskComponent(item: item)
+                                    .draggable(item.id.uuidString)
                                 
                             }
                         }
@@ -242,6 +277,13 @@ struct ContentView: View {
                     }
                     .frame(width: 150)
                     .animation(.spring, value: fridayTasks)
+                    .dropDestination(for: String.self) { droppedTasks, location in
+                        for task in droppedTasks {
+                            taskItems.first(where: { $0.id.uuidString == task })?.weekDay = .friday
+                        }
+                        
+                        return true
+                    }
                     
                 }
                     
@@ -395,7 +437,7 @@ struct ContentView: View {
         }
         //.frame(height: 700)
     }
-    
+        
     func deleteItem(item: TaskItem) {
         modelContext.delete(item)
         try? modelContext.save()

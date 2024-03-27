@@ -9,12 +9,11 @@ import SwiftUI
 import SwiftData
 import UniformTypeIdentifiers
 
-struct TaskComponent: View/*, Codable, Transferable*/ {
+struct TaskComponent: View, Hashable, Codable, Transferable {
     
     var id = UUID()
     
-   @Environment(\.modelContext) private var modelContext
-
+    //@Environment(\.modelContext) private var modelContext
     
     //var width: CGFloat
     //var height: CGFloat
@@ -22,9 +21,9 @@ struct TaskComponent: View/*, Codable, Transferable*/ {
     
     var item: TaskItem
 
-//    static var transferRepresentation: some TransferRepresentation {
-//        CodableRepresentation(contentType: .taskComponent)
-//    }
+    static var transferRepresentation: some TransferRepresentation {
+        CodableRepresentation(contentType: .taskComponent)
+    }
     
     var body: some View {
         VStack(spacing: 0) {
@@ -35,11 +34,7 @@ struct TaskComponent: View/*, Codable, Transferable*/ {
                     Text(item.taskName)
                         .strikethrough(item.completed)
                         .foregroundStyle(.white)
-                        .onTapGesture {
-                            withAnimation {
-                                item.completed.toggle()
-                            }
-                        }
+                        
                     
                     Spacer()
                     
@@ -53,14 +48,19 @@ struct TaskComponent: View/*, Codable, Transferable*/ {
                     Image(systemName: "trash")
                         .foregroundStyle(.white)
                         .onTapGesture {
-                            modelContext.delete(item)
-                            try? modelContext.save()
+                            deleteItem(item: item)
                         }
                 }
             }
             .padding(.horizontal, 10)
             .padding(.vertical, 2.5)
             .transition(.opacity)
+        }
+        .contentShape(Rectangle())
+        .onTapGesture {
+            withAnimation {
+                item.completed.toggle()
+            }
         }
         .frame(height: 35)
         .background((Color(hex: item.taskColor.rawValue) ?? .clear).opacity(0.6))

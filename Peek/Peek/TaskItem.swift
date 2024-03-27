@@ -7,6 +7,8 @@
 
 import Foundation
 import SwiftData
+import SwiftUI
+import UniformTypeIdentifiers
 
 enum Weekday: String, Codable {
     case monday = "Monday"
@@ -32,11 +34,15 @@ enum TaskColor: String, Codable {
 }
 
 @Model
-final class TaskItem: Identifiable, Codable {
+final class TaskItem: Identifiable, Hashable, Codable, Transferable {
     
     enum CodingKeys: CodingKey {
             case id, taskName, weekDay, importance, category, completed, taskColor
         }
+    
+    static var transferRepresentation: some TransferRepresentation {
+        CodableRepresentation(contentType: .taskItem)
+    }
     
     var id = UUID()
     var taskName: String
@@ -76,3 +82,8 @@ final class TaskItem: Identifiable, Codable {
             try container.encode(taskColor, forKey: .taskColor)
         }
 }
+
+extension UTType {
+    static let taskItem = UTType(exportedAs: "co.landonwest.taskItem")
+}
+
