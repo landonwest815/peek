@@ -9,11 +9,11 @@ import SwiftUI
 import SwiftData
 import UniformTypeIdentifiers
 
-struct TaskComponent: View, Hashable, Codable, Transferable {
+struct TaskComponent: View/*, Hashable, Codable, Transferable*/ {
     
     var id = UUID()
     
-    //@Environment(\.modelContext) private var modelContext
+    @Environment(\.modelContext) private var modelContext
     
     //var width: CGFloat
     //var height: CGFloat
@@ -21,20 +21,22 @@ struct TaskComponent: View, Hashable, Codable, Transferable {
     
     var item: TaskItem
 
-    static var transferRepresentation: some TransferRepresentation {
-        CodableRepresentation(contentType: .taskComponent)
-    }
+//    static var transferRepresentation: some TransferRepresentation {
+//        CodableRepresentation(contentType: .taskComponent)
+//    }
     
     var body: some View {
         VStack(spacing: 0) {
             VStack{
                 HStack {
                     
-                    //Text(contents)
-                    Text(item.taskName)
-                        .strikethrough(item.completed)
-                        .foregroundStyle(.white)
+                    ZStack {
+                        //Text(contents)
+                        Text(item.taskName)
+                            .strikethrough(item.completed)
+                            .foregroundStyle(.white)
                         
+                    }
                     
                     Spacer()
                     
@@ -48,7 +50,7 @@ struct TaskComponent: View, Hashable, Codable, Transferable {
                     Image(systemName: "trash")
                         .foregroundStyle(.white)
                         .onTapGesture {
-                            deleteItem(item: item)
+                            modelContext.delete(item)
                         }
                 }
             }
@@ -69,11 +71,6 @@ struct TaskComponent: View, Hashable, Codable, Transferable {
             RoundedRectangle(cornerRadius: 7.5, style: .circular).stroke(Color(.white), lineWidth: 1)
         )
         .opacity(item.completed ? 0.33 : 1.0)
-    }
-    
-    func deleteItem(item: TaskItem) {
-        @Environment(\.modelContext) var modelContext
-        
     }
 }
 
