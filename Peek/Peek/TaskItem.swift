@@ -44,7 +44,7 @@ final class TaskItem: Identifiable, Hashable, Codable, Transferable {
         CodableRepresentation(contentType: .taskItem)
     }
     
-    var id = UUID()
+    @Attribute(.unique) var id = UUID()
     var taskName: String
     var weekDay: Weekday
     var importance: ImportanceLevel

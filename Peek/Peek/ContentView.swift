@@ -101,11 +101,28 @@ struct ContentView: View {
                     .frame(width: 150)
                     .animation(.spring, value: mondayTasks)
                     .dropDestination(for: String.self) { droppedTasks, location in
-                        for task in droppedTasks {
-                            taskItems.first(where: { $0.id.uuidString == task })?.weekDay = .monday
+                        do {
+                            try droppedTasks.forEach { task in
+                                // Find the index of the original task to be removed
+                                guard let index = taskItems.firstIndex(where: { $0.id.uuidString == task }) else {
+                                    throw NSError(domain: "TaskError", code: 1001, userInfo: [NSLocalizedDescriptionKey : "Original task not found"])
+                                }
+                                
+                                // Create a new task based on the original task details but with a different weekday
+                                let originalTask = taskItems[index]
+                                let newTask = TaskItem(taskName: originalTask.taskName, weekDay: .monday, importance: originalTask.importance, category: originalTask.category, taskColor: originalTask.taskColor)
+                                
+                                // Remove the original task from the array
+                                deleteItem(item: originalTask)
+                                
+                                modelContext.insert(newTask)
+                                
+                            }
+                            return true
+                        } catch let error {
+                            print("Error processing drop: \(error)")
+                            return false
                         }
-                        
-                        return true
                     }
                         
                     
@@ -146,11 +163,28 @@ struct ContentView: View {
                     .frame(width: 150)
                     .animation(.spring, value: tuesdayTasks)
                     .dropDestination(for: String.self) { droppedTasks, location in
-                        for task in droppedTasks {
-                            taskItems.first(where: { $0.id.uuidString == task })?.weekDay = .tuesday
+                        do {
+                            try droppedTasks.forEach { task in
+                                // Find the index of the original task to be removed
+                                guard let index = taskItems.firstIndex(where: { $0.id.uuidString == task }) else {
+                                    throw NSError(domain: "TaskError", code: 1001, userInfo: [NSLocalizedDescriptionKey : "Original task not found"])
+                                }
+                                
+                                // Create a new task based on the original task details but with a different weekday
+                                let originalTask = taskItems[index]
+                                let newTask = TaskItem(taskName: originalTask.taskName, weekDay: .tuesday, importance: originalTask.importance, category: originalTask.category, taskColor: originalTask.taskColor)
+                                
+                                // Remove the original task from the array
+                                deleteItem(item: originalTask)
+                                
+                                modelContext.insert(newTask)
+                                
+                            }
+                            return true
+                        } catch let error {
+                            print("Error processing drop: \(error)")
+                            return false
                         }
-                        
-                        return true
                     }
                     
                     Divider()
@@ -190,11 +224,28 @@ struct ContentView: View {
                     .frame(width: 150)
                     .animation(.spring, value: wednesdayTasks)
                     .dropDestination(for: String.self) { droppedTasks, location in
-                        for task in droppedTasks {
-                            taskItems.first(where: { $0.id.uuidString == task })?.weekDay = .wednesday
+                        do {
+                            try droppedTasks.forEach { task in
+                                // Find the index of the original task to be removed
+                                guard let index = taskItems.firstIndex(where: { $0.id.uuidString == task }) else {
+                                    throw NSError(domain: "TaskError", code: 1001, userInfo: [NSLocalizedDescriptionKey : "Original task not found"])
+                                }
+                                
+                                // Create a new task based on the original task details but with a different weekday
+                                let originalTask = taskItems[index]
+                                let newTask = TaskItem(taskName: originalTask.taskName, weekDay: .wednesday, importance: originalTask.importance, category: originalTask.category, taskColor: originalTask.taskColor)
+                                
+                                // Remove the original task from the array
+                                deleteItem(item: originalTask)
+                                
+                                modelContext.insert(newTask)
+                                
+                            }
+                            return true
+                        } catch let error {
+                            print("Error processing drop: \(error)")
+                            return false
                         }
-                        
-                        return true
                     }
                     
                     Divider()
@@ -234,12 +285,30 @@ struct ContentView: View {
                     .frame(width: 150)
                     .animation(.spring, value: thursdayTasks)
                     .dropDestination(for: String.self) { droppedTasks, location in
-                        for task in droppedTasks {
-                            taskItems.first(where: { $0.id.uuidString == task })?.weekDay = .thursday
+                        do {
+                            try droppedTasks.forEach { task in
+                                // Find the index of the original task to be removed
+                                guard let index = taskItems.firstIndex(where: { $0.id.uuidString == task }) else {
+                                    throw NSError(domain: "TaskError", code: 1001, userInfo: [NSLocalizedDescriptionKey : "Original task not found"])
+                                }
+                                
+                                // Create a new task based on the original task details but with a different weekday
+                                let originalTask = taskItems[index]
+                                let newTask = TaskItem(taskName: originalTask.taskName, weekDay: .thursday, importance: originalTask.importance, category: originalTask.category, taskColor: originalTask.taskColor)
+                                
+                                // Remove the original task from the array
+                                deleteItem(item: originalTask)
+                                
+                                modelContext.insert(newTask)
+                                
+                            }
+                            return true
+                        } catch let error {
+                            print("Error processing drop: \(error)")
+                            return false
                         }
-                        
-                        return true
                     }
+
                     
                     Divider()
                     
@@ -278,12 +347,30 @@ struct ContentView: View {
                     .frame(width: 150)
                     .animation(.spring, value: fridayTasks)
                     .dropDestination(for: String.self) { droppedTasks, location in
-                        for task in droppedTasks {
-                            taskItems.first(where: { $0.id.uuidString == task })?.weekDay = .friday
+                        do {
+                            try droppedTasks.forEach { task in
+                                // Find the index of the original task to be removed
+                                guard let index = taskItems.firstIndex(where: { $0.id.uuidString == task }) else {
+                                    throw NSError(domain: "TaskError", code: 1001, userInfo: [NSLocalizedDescriptionKey : "Original task not found"])
+                                }
+                                
+                                // Create a new task based on the original task details but with a different weekday
+                                let originalTask = taskItems[index]
+                                let newTask = TaskItem(taskName: originalTask.taskName, weekDay: .friday, importance: originalTask.importance, category: originalTask.category, taskColor: originalTask.taskColor)
+                                
+                                // Remove the original task from the array
+                                deleteItem(item: originalTask)
+                                
+                                modelContext.insert(newTask)
+                                
+                            }
+                            return true
+                        } catch let error {
+                            print("Error processing drop: \(error)")
+                            return false
                         }
-                        
-                        return true
                     }
+
                     
                 }
                     
@@ -440,7 +527,18 @@ struct ContentView: View {
         
     func deleteItem(item: TaskItem) {
         modelContext.delete(item)
-        try? modelContext.save()
+        
+        do {
+            try modelContext.save()
+        } catch {
+            // Handle the error appropriately
+            print("Failed to save context: \(error.localizedDescription)")
+            
+            // Optionally, you could also include more sophisticated error handling such as:
+            // - Informing the user with a user-friendly message
+            // - Attempting to recover or rollback changes
+            // - Logging the error to a file or analytics service for further investigation
+        }
     }
     
     func countCompletedTasks() -> Int {
@@ -449,10 +547,20 @@ struct ContentView: View {
     }
     
     func addTask() {
-            let newTask = TaskItem(taskName: textEntry, weekDay: selected, importance: importance, category: selectedCategory, taskColor: selectedColor)
+        if textEntry.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+            print("No task entered")
+            return
+        }
+        let newTask = TaskItem(taskName: textEntry, weekDay: selected, importance: importance, category: selectedCategory, taskColor: selectedColor)
         withAnimation(.spring()) {
             modelContext.insert(newTask)
+            do {
+                try modelContext.save()
+            } catch {
+                print("Failed to save new task: \(error.localizedDescription)")
+            }
         }
+        textEntry = ""
     }
     
     var mondayTasks: [TaskItem] {
