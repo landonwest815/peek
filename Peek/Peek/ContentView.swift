@@ -36,33 +36,42 @@ struct ContentView: View {
         ImportanceLevel.level1,
         ImportanceLevel.level2,
     ]
+    
+    @State private var selectedDay = Weekday.none
+    var weekdays = [
+        Weekday.monday,
+        Weekday.tuesday,
+        Weekday.wednesday,
+        Weekday.thursday,
+        Weekday.friday,
+    ]
 
     var body: some View {
         
         ZStack {
-            VStack {
+            VStack(spacing: 0) {
                 
-                HStack {
-                    Text("Peek")
-                        .font(.headline)
-                        .fontWeight(.semibold)
-                    
-                    Text("by Landon West")
-                        .font(.caption)
-                        .fontWeight(.regular)
-                    
-                    Spacer()
-                    
-                    Text(taskItems.count == 0 ? "" : "\(Double(countCompletedTasks()) / Double(taskItems.count) * 100, specifier: "%.0f")%")
-                        .font(.headline)
-                        .fontWeight(.semibold)
-                    
-                    Text(taskItems.count == 0 ? "" : "\(countCompletedTasks()) / \(taskItems.count)")
-                        .font(.headline)
-                        .fontWeight(.semibold)
-                }
+//                HStack(spacing: 5) {
+//                    Image(systemName: "pencil.and.scribble")
+//                        .font(.headline)
+//                    
+//                    Text("Peek")
+//                        .font(.headline)
+//                        .fontWeight(.semibold)
+//                    
+//                    Spacer()
+//                    
+//                    Text(taskItems.count == 0 ? "" : "\(Double(countCompletedTasks()) / Double(taskItems.count) * 100, specifier: "%.0f")%")
+//                        .font(.headline)
+//                        .fontWeight(.semibold)
+//                    
+//                    Text(taskItems.count == 0 ? "" : "\(countCompletedTasks()) / \(taskItems.count)")
+//                        .font(.headline)
+//                        .fontWeight(.semibold)
+//                }
+//                .padding(.bottom, 7.5)
                 
-                Divider()
+                //Divider()
                 
                 HStack {
                     
@@ -71,11 +80,12 @@ struct ContentView: View {
                             Text("Monday")
                                 .font(.headline)
                                 .fontWeight(.semibold)
-                            if (currentDay == .monday) {
-                                Image(systemName: "arrowtriangle.backward.fill")
-                                    .resizable()
-                                    .frame(width: 7, height: 10)
-                            }
+                                .fontDesign(.rounded)
+//                            if (currentDay == .monday) {
+//                                Image(systemName: "arrowtriangle.backward.fill")
+//                                    .resizable()
+//                                    .frame(width: 7, height: 10)
+//                            }
                             Spacer()
                         }
                         
@@ -83,6 +93,9 @@ struct ContentView: View {
                             
                             HStack {
                                 Text("Nothing planned for today!")
+                                    .font(.subheadline)
+                                    .fontWeight(.light)
+                                    .fontDesign(.rounded)
                                     .foregroundStyle(.gray)
                                 Spacer()
                             }
@@ -98,6 +111,7 @@ struct ContentView: View {
                         }
                         Spacer()
                     }
+                    .padding(.top, 7.5)
                     .frame(width: 150)
                     .animation(.spring, value: mondayTasks)
                     .dropDestination(for: String.self) { droppedTasks, location in
@@ -133,11 +147,12 @@ struct ContentView: View {
                             Text("Tuesday")
                                 .font(.headline)
                                 .fontWeight(.semibold)
-                            if (currentDay == .tuesday) {
-                                Image(systemName: "arrowtriangle.backward.fill")
-                                    .resizable()
-                                    .frame(width: 7, height: 10)
-                            }
+                                .fontDesign(.rounded)
+//                            if (currentDay == .tuesday) {
+//                                Image(systemName: "arrowtriangle.backward.fill")
+//                                    .resizable()
+//                                    .frame(width: 7, height: 10)
+//                            }
                             Spacer()
                         }
                         
@@ -145,6 +160,9 @@ struct ContentView: View {
                             
                             HStack {
                                 Text("Nothing planned for today!")
+                                    .font(.subheadline)
+                                    .fontWeight(.light)
+                                    .fontDesign(.rounded)
                                     .foregroundStyle(.gray)
                                 Spacer()
                             }
@@ -160,6 +178,7 @@ struct ContentView: View {
                         }
                         Spacer()
                     }
+                    .padding(.top, 7.5)
                     .frame(width: 150)
                     .animation(.spring, value: tuesdayTasks)
                     .dropDestination(for: String.self) { droppedTasks, location in
@@ -194,11 +213,12 @@ struct ContentView: View {
                             Text("Wednesday")
                                 .font(.headline)
                                 .fontWeight(.semibold)
-                            if (currentDay == .wednesday) {
-                                Image(systemName: "arrowtriangle.backward.fill")
-                                    .resizable()
-                                    .frame(width: 7, height: 10)
-                            }
+                                .fontDesign(.rounded)
+//                            if (currentDay == .wednesday) {
+//                                Image(systemName: "arrowtriangle.backward.fill")
+//                                    .resizable()
+//                                    .frame(width: 7, height: 10)
+//                            }
                             Spacer()
                         }
                         
@@ -206,6 +226,9 @@ struct ContentView: View {
                             
                             HStack {
                                 Text("Nothing planned for today!")
+                                    .font(.subheadline)
+                                    .fontWeight(.light)
+                                    .fontDesign(.rounded)
                                     .foregroundStyle(.gray)
                                 Spacer()
                             }
@@ -221,6 +244,7 @@ struct ContentView: View {
                         }
                         Spacer()
                     }
+                    .padding(.top, 7.5)
                     .frame(width: 150)
                     .animation(.spring, value: wednesdayTasks)
                     .dropDestination(for: String.self) { droppedTasks, location in
@@ -255,11 +279,12 @@ struct ContentView: View {
                             Text("Thursday")
                                 .font(.headline)
                                 .fontWeight(.semibold)
-                            if (currentDay == .thursday) {
-                                Image(systemName: "arrowtriangle.backward.fill")
-                                    .resizable()
-                                    .frame(width: 7, height: 10)
-                            }
+                                .fontDesign(.rounded)
+//                            if (currentDay == .thursday) {
+//                                Image(systemName: "arrowtriangle.backward.fill")
+//                                    .resizable()
+//                                    .frame(width: 7, height: 10)
+//                            }
                             Spacer()
                         }
                         
@@ -267,6 +292,9 @@ struct ContentView: View {
                             
                             HStack {
                                 Text("Nothing planned for today!")
+                                    .font(.subheadline)
+                                    .fontWeight(.light)
+                                    .fontDesign(.rounded)
                                     .foregroundStyle(.gray)
                                 Spacer()
                             }
@@ -282,6 +310,7 @@ struct ContentView: View {
                         }
                         Spacer()
                     }
+                    .padding(.top, 7.5)
                     .frame(width: 150)
                     .animation(.spring, value: thursdayTasks)
                     .dropDestination(for: String.self) { droppedTasks, location in
@@ -317,11 +346,12 @@ struct ContentView: View {
                             Text("Friday")
                                 .font(.headline)
                                 .fontWeight(.semibold)
-                            if (currentDay == .friday) {
-                                Image(systemName: "arrowtriangle.backward.fill")
-                                    .resizable()
-                                    .frame(width: 7, height: 10)
-                            }
+                                .fontDesign(.rounded)
+//                            if (currentDay == .friday) {
+//                                Image(systemName: "arrowtriangle.backward.fill")
+//                                    .resizable()
+//                                    .frame(width: 7, height: 10)
+//                            }
                             Spacer()
                         }
                         
@@ -329,6 +359,9 @@ struct ContentView: View {
                             
                             HStack {
                                 Text("Nothing planned for today!")
+                                    .font(.subheadline)
+                                    .fontWeight(.light)
+                                    .fontDesign(.rounded)
                                     .foregroundStyle(.gray)
                                 Spacer()
                             }
@@ -344,6 +377,7 @@ struct ContentView: View {
                         }
                         Spacer()
                     }
+                    .padding(.top, 7.5)
                     .frame(width: 150)
                     .animation(.spring, value: fridayTasks)
                     .dropDestination(for: String.self) { droppedTasks, location in
@@ -370,6 +404,66 @@ struct ContentView: View {
                             return false
                         }
                     }
+                    
+                    Divider()
+                    
+                    VStack {
+                        HStack {
+                            Text("General")
+                                .font(.headline)
+                                .fontWeight(.semibold)
+                            Spacer()
+                        }
+                        
+                        if generalTasks.isEmpty {
+                            
+                            HStack {
+                                Text("Nothing planned!")
+                                    .font(.subheadline)
+                                    .fontWeight(.light)
+                                    .fontDesign(.rounded)
+                                    .foregroundStyle(.gray)
+                                Spacer()
+                            }
+                            .padding(.vertical, 2.5)
+                            
+                        } else {
+                            ForEach(generalTasks, id: \.self) { item in
+                                
+                                TaskComponent(item: item)
+                                    .draggable(item.id.uuidString)
+                                
+                            }
+                        }
+                        Spacer()
+                    }
+                    .padding(.top, 7.5)
+                    .frame(width: 150)
+                    .animation(.spring, value: generalTasks)
+                    .dropDestination(for: String.self) { droppedTasks, location in
+                        do {
+                            try droppedTasks.forEach { task in
+                                // Find the index of the original task to be removed
+                                guard let index = taskItems.firstIndex(where: { $0.id.uuidString == task }) else {
+                                    throw NSError(domain: "TaskError", code: 1001, userInfo: [NSLocalizedDescriptionKey : "Original task not found"])
+                                }
+                                
+                                // Create a new task based on the original task details but with a different weekday
+                                let originalTask = taskItems[index]
+                                let newTask = TaskItem(taskName: originalTask.taskName, weekDay: .none, importance: originalTask.importance, category: originalTask.category, taskColor: originalTask.taskColor)
+                                
+                                // Remove the original task from the array
+                                deleteItem(item: originalTask)
+                                
+                                modelContext.insert(newTask)
+                                
+                            }
+                            return true
+                        } catch let error {
+                            print("Error processing drop: \(error)")
+                            return false
+                        }
+                    }
 
                     
                 }
@@ -377,29 +471,22 @@ struct ContentView: View {
                 Divider()
                 
                 ZStack {
-                    HStack(spacing: 12.5) {
-                        //                        Picker("", selection: $selectedCategory) {
-                        //                            ForEach(userDataArray.first?.categories ?? ["N/A"], id: \.self) {
-                        //                                Text($0)
-                        //                            }
-                        //                        }
-                        //                        .labelsHidden()
-                        //                        .pickerStyle(.menu)
-                        //                        .tint(.gray)
-                        //                        .frame(width: 105)
+                    HStack(spacing: 25) {
                         
-                        HStack(spacing: 10) {
+                        HStack(spacing: 7.5) {
                             ForEach(colors, id: \.self) { color in
                                 Button(action: {
-                                    if self.selectedColor.rawValue == color.rawValue {
-                                        self.selectedColor = .noColor
-                                    } else {
-                                        self.selectedColor = color
+                                    withAnimation {
+                                        if self.selectedColor.rawValue == color.rawValue {
+                                            self.selectedColor = .noColor
+                                        } else {
+                                            self.selectedColor = color
+                                        }
                                     }
                                 }) {
                                     Circle()
-                                        .fill(Color(hex: color.rawValue) ?? .red)
-                                        .frame(width: 20, height: 20)
+                                        .fill((Color(hex: color.rawValue)).opacity(0.6))
+                                        .frame(width: 22.5, height: 22.5)
                                         .overlay(
                                             Circle()
                                                 .stroke(Color.white, lineWidth: self.selectedColor == color ? 3 : 0)
@@ -409,58 +496,71 @@ struct ContentView: View {
                             }
                         }
                         
-                        Picker(selection: $selected, label: Text("")) {
-                            Text("M").tag(Weekday.monday)
-                            Text("T").tag(Weekday.tuesday)
-                            Text("W").tag(Weekday.wednesday)
-                            Text("Th").tag(Weekday.thursday)
-                            Text("F").tag(Weekday.friday)
+                        // Day Picker
+                        HStack(spacing: 7.5) {
+                            ForEach(weekdays, id: \.self) { day in
+                                Button(action: {
+                                    withAnimation {
+                                        if self.selectedDay == day {
+                                            self.selectedDay = .none
+                                        } else {
+                                            self.selectedDay = day
+                                        }
+                                    }
+                                }) {
+                                    ZStack {
+                                        RoundedRectangle(cornerRadius: 5) // Adjust corner radius as needed
+                                            .fill(self.selectedDay == day ? Color.white.opacity(0.7) : Color(.darkGray).opacity(0.7)) // Background color
+                                            .frame(width: 30, height: 22.5) // Adjust width and height as needed
+                                        Text(day.rawValue.prefix(1)) // Display first letter of the day
+                                            .foregroundStyle(self.selectedDay == day ? .black : .white)
+                                            .font(.caption)
+                                            .fontWeight(.semibold)
+                                            .fontDesign(.rounded)
+                                    }
+                                }
+                                .buttonStyle(PlainButtonStyle())
+                            }
                         }
-                        .labelsHidden()
-                        .pickerStyle(.segmented)
-                        .frame(width: 175)
                         
-//                        Picker(selection: $importance, label: Text("")) {
-//                            Text("N/A").tag(ImportanceLevel.level0)
-//                            Text("!").tag(ImportanceLevel.level1)
-//                            Text("!!").tag(ImportanceLevel.level2)
-//                        }
-//                        .labelsHidden()
-//                        .pickerStyle(.segmented)
-//                        .tint(.gray)
-//                        .frame(width: 105)
-                        
-                        HStack(spacing: 10) {
+                        HStack(spacing: 7.5) {
                             ForEach(importances, id: \.self) { importance in
                                 Button(action: {
-                                    if self.importance.rawValue == importance.rawValue {
-                                        self.importance = .level0
-                                    } else {
-                                        self.importance = importance
+                                    withAnimation {
+                                        if self.importance.rawValue == importance.rawValue {
+                                            self.importance = .level0
+                                        } else {
+                                            self.importance = importance
+                                        }
                                     }
                                 }) {
                                     ZStack {
                                         Circle()
-                                            .fill(Color(.darkGray).opacity(0.7))
-                                            .frame(width: 20, height: 20)
-                                            .overlay(
-                                                Circle()
-                                                    .stroke(Color.white, lineWidth: self.importance == importance ? 3 : 0)
-                                            )
+                                            .fill(self.importance == importance ? Color.white.opacity(0.7) : Color(.darkGray).opacity(0.7))
+                                            .frame(width: 22.5, height: 22.5)
+                                            
                                         Text(importance.rawValue)
-                                            .foregroundStyle(.white)
+                                            .foregroundStyle(self.importance == importance ? .black : .white)
+                                            .font(.caption)
+                                            .fontWeight(.semibold)
+                                            .fontDesign(.rounded)
                                     }
                                 }
-                                .buttonBorderShape(.circle)
+                                .buttonStyle(PlainButtonStyle())
                             }
                         }
                         
                         
-                        TextField(" Any Tasks?", text: $textEntry)
+                        TextField("Any Tasks?", text: $textEntry)
                             .textFieldStyle(.plain)
                             .padding(2.5)
+                            .frame(height: 22.5)
+                            .font(.caption)
+                            .fontWeight(.semibold)
+                            .fontDesign(.rounded)
+                            .offset(x: 5)
                             .overlay(
-                                RoundedRectangle(cornerRadius: 5) // Set your desired corner radius
+                                RoundedRectangle(cornerRadius: 12) // Set your desired corner radius
                                     .stroke(Color.gray.opacity(0.5), lineWidth: 1) // Set the border color and line width
                             )
                             .onSubmit {
@@ -472,7 +572,7 @@ struct ContentView: View {
                     }
                     
                 }
-                .padding(5)
+                .padding(.top, 10)
                     
                 
             }
@@ -480,7 +580,7 @@ struct ContentView: View {
             .padding(.horizontal)
         }
         .transition(.slide)
-        .background(.thinMaterial)
+        .background(.ultraThinMaterial)
         .onAppear() {
 //            do {
 //                try modelContext.delete(model: UserData.self)
@@ -551,7 +651,7 @@ struct ContentView: View {
             print("No task entered")
             return
         }
-        let newTask = TaskItem(taskName: textEntry, weekDay: selected, importance: importance, category: selectedCategory, taskColor: selectedColor)
+        let newTask = TaskItem(taskName: textEntry, weekDay: selectedDay, importance: importance, category: selectedCategory, taskColor: selectedColor)
         withAnimation(.spring()) {
             modelContext.insert(newTask)
             do {
@@ -581,6 +681,10 @@ struct ContentView: View {
     
     var fridayTasks: [TaskItem] {
         taskItems.filter { $0.weekDay.rawValue == "Friday" }
+    }
+    
+    var generalTasks: [TaskItem] {
+        taskItems.filter { $0.weekDay.rawValue == "" }
     }
 }
 

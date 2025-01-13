@@ -35,6 +35,9 @@ struct TaskComponent: View/*, Hashable, Codable, Transferable*/ {
                         Text(item.taskName)
                             .strikethrough(item.completed)
                             .foregroundStyle(.white)
+                            .font(.headline)
+                            .fontWeight(.semibold)
+                            .fontDesign(.rounded)
                         
                     }
                     
@@ -46,9 +49,16 @@ struct TaskComponent: View/*, Hashable, Codable, Transferable*/ {
 //                    }
                     
                     Text(item.importance.rawValue)
+                        .foregroundStyle(.white)
+                        .fontWeight(.semibold)
+                        .fontDesign(.rounded)
+                        .font(.headline)
                     
                     Image(systemName: "trash")
                         .foregroundStyle(.white)
+                        .fontWeight(.semibold)
+                        .fontDesign(.rounded)
+                        .font(.headline)
                         .onTapGesture {
                             modelContext.delete(item)
                         }
@@ -65,11 +75,13 @@ struct TaskComponent: View/*, Hashable, Codable, Transferable*/ {
             }
         }
         .frame(height: 35)
-        .background((Color(hex: item.taskColor.rawValue) ?? .clear).opacity(0.6))
-        .cornerRadius(7.5)
-        .overlay(
-            RoundedRectangle(cornerRadius: 7.5, style: .circular).stroke(Color(.white), lineWidth: 1)
+        .background(
+            (Color(hex: item.taskColor == .noColor ? "505050" : item.taskColor.rawValue)).opacity(0.6)
         )
+        .cornerRadius(7.5)
+//        .overlay(
+//            RoundedRectangle(cornerRadius: 7.5, style: .circular).stroke(Color(.white), lineWidth: 1)
+//        )
         .opacity(item.completed ? 0.33 : 1.0)
     }
 }
@@ -82,7 +94,7 @@ extension UTType {
     let config = ModelConfiguration(isStoredInMemoryOnly: true)
     let container = try! ModelContainer(for: TaskItem.self, UserData.self, configurations: config)
     
-    let task1 = TaskItem(taskName: "Take out trash", weekDay: .tuesday, importance: .level1, category: "Personal", taskColor: .green)
+    let task1 = TaskItem(taskName: "Take out trash", weekDay: .tuesday, importance: .level1, category: "Personal", taskColor: .noColor)
     container.mainContext.insert(task1)
     
     return TaskComponent(item: task1)

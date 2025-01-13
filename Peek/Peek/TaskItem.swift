@@ -16,7 +16,7 @@ enum Weekday: String, Codable {
     case wednesday = "Wednesday"
     case thursday = "Thursday"
     case friday = "Friday"
-    case none = "n/a"
+    case none = ""
 }
 
 enum ImportanceLevel: String, Codable {
