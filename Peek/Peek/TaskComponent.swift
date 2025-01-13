@@ -76,12 +76,12 @@ struct TaskComponent: View/*, Hashable, Codable, Transferable*/ {
         }
         .frame(height: 35)
         .background(
-            (Color(hex: item.taskColor == .noColor ? "505050" : item.taskColor.rawValue)).opacity(0.6)
+            item.taskColor == .noColor ? Color.clear : Color(hex: item.taskColor.rawValue).opacity(0.7)
         )
         .cornerRadius(7.5)
-//        .overlay(
-//            RoundedRectangle(cornerRadius: 7.5, style: .circular).stroke(Color(.white), lineWidth: 1)
-//        )
+        .overlay(
+            RoundedRectangle(cornerRadius: 7.5, style: .circular).stroke((Color(hex: item.taskColor == .noColor ? "505050" : item.taskColor.rawValue)).opacity(0.7), lineWidth: 1)
+        )
         .opacity(item.completed ? 0.33 : 1.0)
     }
 }
@@ -94,7 +94,7 @@ extension UTType {
     let config = ModelConfiguration(isStoredInMemoryOnly: true)
     let container = try! ModelContainer(for: TaskItem.self, UserData.self, configurations: config)
     
-    let task1 = TaskItem(taskName: "Take out trash", weekDay: .tuesday, importance: .level1, category: "Personal", taskColor: .noColor)
+    let task1 = TaskItem(taskName: "Take out trash", weekDay: .tuesday, importance: .level1, category: "Personal", taskColor: .red)
     container.mainContext.insert(task1)
     
     return TaskComponent(item: task1)
