@@ -77,16 +77,17 @@ struct TaskComponent: View/*, Hashable, Codable, Transferable*/ {
             }
             .frame(height: 35)
             .background(
-                item.taskColor == .noColor ? .white.opacity(0.05) : Color(hex: item.taskColor.rawValue).opacity(0.7)
+                item.taskColor == .noColor ? .white.opacity(0.15) : Color(hex: item.taskColor.rawValue).opacity(0.7)
             )
-            //.background(.ultraThinMaterial)
+            //.background(.ultraThickMaterial)
             .cornerRadius(7.5)
             .overlay(
-                RoundedRectangle(cornerRadius: 7.5, style: .circular).stroke((Color(hex: item.taskColor == .noColor ? "505050" : item.taskColor.rawValue)).opacity(0.75), lineWidth: 1)
+                RoundedRectangle(cornerRadius: 7.5, style: .circular).stroke((Color(hex: item.taskColor == .noColor ? "808080" : item.taskColor.rawValue)).opacity(0.75), lineWidth: 1)
             )
             .opacity(item.completed ? 0.33 : 1.0)
+            .shadow(color: .black, radius: 0.5)
         }
-        .shadow(color: .black, radius: 0.5)
+        //.shadow(color: .black, radius: 0.5)
     }
 }
 

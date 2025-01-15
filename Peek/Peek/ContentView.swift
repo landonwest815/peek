@@ -17,7 +17,12 @@ struct ContentView: View {
     @State private var isOn: Bool = false
     @State private var isOn2: Bool = false
     
+    enum FocusField: Hashable {
+        case field
+    }
+    
     @State private var textEntry: String = ""
+    @FocusState private var focusedField: FocusField?
     @State private var selected = Weekday.monday
     @State private var currentDay = Weekday.none
     
@@ -76,6 +81,39 @@ struct ContentView: View {
     var body: some View {
         ZStack {
             VStack(spacing: 0) {
+                
+                HStack(spacing: 10) {
+                    HStack(spacing: 2.5) {
+                        Text("PeekaDO")
+                        Text("by Landon West")
+                            .foregroundStyle(.gray)
+                    }
+        
+                    Spacer()
+                    
+                    HStack(spacing: 10) {
+                        Text("This Week")
+                        
+                        HStack(spacing: 2.5) {
+                            Text("\(taskItems.filter { $0.completed }.count)")
+                            Text("/")
+                                .font(.subheadline)
+                            Text("\(taskItems.count)")
+                        }
+                        .foregroundStyle(.gray)
+                        
+                        HStack(spacing: 2.5) {
+                            Text(taskItems.isEmpty ? "0" : "\(Int((Double(taskItems.filter { $0.completed }.count) / Double(taskItems.count)) * 100))")
+                            Text("%")
+                                .font(.subheadline)
+                        }
+                        .foregroundStyle(.gray)
+                    }
+                }
+                .padding(.bottom, 10)
+                .font(.headline)
+                .fontWeight(.semibold)
+                .fontDesign(.rounded)
                                 
                 // The top HStack with columns for each day
                 HStack(spacing: 20) {
@@ -127,13 +165,13 @@ struct ContentView: View {
                                         .fill(
                                             selectedColor == color
                                             ? Color(hex: color.rawValue).opacity(0.75)
-                                            : Color.white.opacity(0.05)
+                                            : Color.white.opacity(0.15)
                                         )
                                         .overlay(
                                             Circle()
-                                                .stroke(Color.white.opacity(0.15), lineWidth: selectedColor == color ? 0 : 1)
+                                                .stroke(Color(hex: "808080"), lineWidth: 1)
                                         )
-                                        .shadow(color: .black, radius: 0.5)
+                                        .shadow(color: .black.opacity(0.75), radius: 0.5)
                                         .frame(width: 22.5, height: 22.5)
                                     Circle()
                                         .fill(Color(hex: color.rawValue).opacity(0.6))
@@ -158,13 +196,13 @@ struct ContentView: View {
                                         .fill(
                                             selectedDay == day
                                             ? Color.white.opacity(0.7)
-                                            : Color.white.opacity(0.05)
+                                            : Color.white.opacity(0.15)
                                         )
                                         .overlay(
                                             RoundedRectangle(cornerRadius: 5)
-                                                .stroke(Color.white.opacity(0.15), lineWidth: selectedDay == day ? 0 : 1)
+                                                .stroke(Color(hex: "808080"), lineWidth: 1)
                                         )
-                                        .shadow(color: .black, radius: 0.5)
+                                        .shadow(color: .black.opacity(0.75), radius: 0.5)
                                         .frame(width: 30, height: 22.5)
                                     Text(day.rawValue.prefix(1))
                                         .foregroundStyle(selectedDay == day ? .black : .white)
@@ -190,13 +228,13 @@ struct ContentView: View {
                                         .fill(
                                             importance == level
                                             ? Color.white.opacity(0.7)
-                                            : Color.white.opacity(0.05)
+                                            : Color.white.opacity(0.15)
                                         )
                                         .overlay(
                                             Circle()
-                                                .stroke(Color.white.opacity(0.15), lineWidth: importance == level ? 0 : 1)
+                                                .stroke(Color(hex: "808080"), lineWidth: 1)
                                         )
-                                        .shadow(color: .black, radius: 0.5)
+                                        .shadow(color: .black.opacity(0.75), radius: 0.5)
                                         .frame(width: 22.5, height: 22.5)
                                     Text(level.rawValue)
                                         .foregroundStyle(importance == level ? .black : .white)
@@ -213,6 +251,7 @@ struct ContentView: View {
                     ZStack(alignment: .trailing) {
                         // Text Field for adding new tasks
                         TextField("What next?", text: $textEntry)
+                            .focused($focusedField, equals: .field)
                             .textFieldStyle(.plain)
                             .padding(2.5)
                             .frame(height: 25)
@@ -222,7 +261,7 @@ struct ContentView: View {
                             .offset(x: 7.5)
                             .overlay(
                                 RoundedRectangle(cornerRadius: 12)
-                                    .stroke(Color.gray.opacity(0.4), lineWidth: 1)
+                                    .stroke(Color(hex: "909090"), lineWidth: 1)
                             )
                             .onSubmit {
                                 withAnimation {
@@ -230,7 +269,7 @@ struct ContentView: View {
                                 }
                                 textEntry = ""
                             }
-                            .background(Color.white.opacity(0.025))
+                            .background(Color.white.opacity(0.1))
                             .cornerRadius(12)
                         
                         Button(action: {
@@ -242,13 +281,13 @@ struct ContentView: View {
                             ZStack {
                                 Circle()
                                     .fill(
-                                        Color.white.opacity(0.7)
+                                        Color(hex: TaskColor.blue.rawValue).opacity(0.7)
                                     )
                                     .overlay(
                                         Circle()
                                             .stroke(Color.white.opacity(0.15), lineWidth: 1)
                                     )
-                                    .shadow(color: .black, radius: 0.5)
+                                    .shadow(color: .black.opacity(0.75), radius: 0.5)
                                     .frame(width: 17.5, height: 17.5)
                                 
                                 Image(systemName: "arrow.up")
@@ -261,7 +300,7 @@ struct ContentView: View {
                         }
                         .buttonStyle(.plain)
                         .buttonBorderShape(.circle)
-                        .padding(.trailing, 3.33)
+                        .padding(.trailing, 3.5)
                     }
                     
                     Button(action: {
@@ -273,13 +312,13 @@ struct ContentView: View {
                         ZStack(alignment: .center) {
                             Circle()
                                 .fill(
-                                    Color.white.opacity(0.05)
+                                    Color.white.opacity(0.15)
                                 )
                                 .overlay(
                                     Circle()
-                                        .stroke(Color.white.opacity(0.15), lineWidth: 1)
+                                        .stroke(Color(hex: "808080"), lineWidth: 1)
                                 )
-                                .shadow(color: .black, radius: 0.5)
+                                .shadow(color: .black.opacity(0.75), radius: 0.5)
                                 .frame(width: 22.5, height: 22.5)
                             
                             Image(systemName: "gear")
@@ -288,7 +327,6 @@ struct ContentView: View {
                                 .frame(width: 15)
                                 .foregroundStyle(.white.opacity(0.5))
                                 .fontWeight(.semibold)
-                                .offset(x: 0)
                         }
                     }
                     .buttonStyle(.plain)
@@ -306,6 +344,7 @@ struct ContentView: View {
         .onAppear {
             selectedColor = .noColor
             importance = .level0
+            self.focusedField = .field
             
             let currentDate = Date()
             let dateFormatter = DateFormatter()
@@ -367,11 +406,13 @@ struct ContentView: View {
     }
     
     func deleteItem(item: TaskItem) {
-        modelContext.delete(item)
-        do {
-            try modelContext.save()
-        } catch {
-            print("Failed to save context: \(error.localizedDescription)")
+        withAnimation {
+            modelContext.delete(item)
+            do {
+                try modelContext.save()
+            } catch {
+                print("Failed to save context: \(error.localizedDescription)")
+            }
         }
     }
     
@@ -512,11 +553,11 @@ struct DayColumn: View {
                                 .fontDesign(.rounded)
                         }
                         .frame(width: 17.5, height: 17.5)
-                        .shadow(color: .black, radius: 0.5)
-                        .background(.white.opacity(0.05))
+                        .shadow(color: .black.opacity(0.75), radius: 0.5)
+                        .background(.white.opacity(0.15))
                         .overlay(
                             RoundedRectangle(cornerRadius: 5)
-                                .stroke(Color.white.opacity(0.15), lineWidth: 1)
+                                .stroke(Color(hex: "808080"), lineWidth: 1)
                         )
                         .cornerRadius(5)
                     }
