@@ -76,12 +76,19 @@ struct ContentView: View {
     var body: some View {
         ZStack {
             VStack(spacing: 0) {
+                                
                 // The top HStack with columns for each day
-                HStack(spacing: 10) {
+                HStack(spacing: 20) {
                     ForEach(dailyColumns.indices, id: \.self) { index in
                         // Put a divider between columns (but not before the first one)
                         if index != 0 {
+                            //Divider()
+                        }
+                        
+                        if index == 5 {
                             Divider()
+                                .padding(.horizontal)
+                                .opacity(0)
                         }
                         
                         let data = dailyColumns[index]
@@ -102,7 +109,7 @@ struct ContentView: View {
                     }
                 }
                 
-                Divider()
+                //Divider()
                 
                 // The bottom bar with color pickers, day pickers, importance pickers, and text field
                 HStack(spacing: 25) {
@@ -124,8 +131,9 @@ struct ContentView: View {
                                         )
                                         .overlay(
                                             Circle()
-                                                .stroke(Color.white.opacity(0.25), lineWidth: selectedColor == color ? 0 : 1)
+                                                .stroke(Color.white.opacity(0.15), lineWidth: selectedColor == color ? 0 : 1)
                                         )
+                                        .shadow(color: .black, radius: 0.5)
                                         .frame(width: 22.5, height: 22.5)
                                     Circle()
                                         .fill(Color(hex: color.rawValue).opacity(0.6))
@@ -154,8 +162,9 @@ struct ContentView: View {
                                         )
                                         .overlay(
                                             RoundedRectangle(cornerRadius: 5)
-                                                .stroke(Color.white.opacity(0.25), lineWidth: selectedDay == day ? 0 : 1)
+                                                .stroke(Color.white.opacity(0.15), lineWidth: selectedDay == day ? 0 : 1)
                                         )
+                                        .shadow(color: .black, radius: 0.5)
                                         .frame(width: 30, height: 22.5)
                                     Text(day.rawValue.prefix(1))
                                         .foregroundStyle(selectedDay == day ? .black : .white)
@@ -185,8 +194,9 @@ struct ContentView: View {
                                         )
                                         .overlay(
                                             Circle()
-                                                .stroke(Color.white.opacity(0.25), lineWidth: importance == level ? 0 : 1)
+                                                .stroke(Color.white.opacity(0.15), lineWidth: importance == level ? 0 : 1)
                                         )
+                                        .shadow(color: .black, radius: 0.5)
                                         .frame(width: 22.5, height: 22.5)
                                     Text(level.rawValue)
                                         .foregroundStyle(importance == level ? .black : .white)
@@ -200,30 +210,95 @@ struct ContentView: View {
                         }
                     }
                     
-                    // Text Field for adding new tasks
-                    TextField("What next?", text: $textEntry)
-                        .textFieldStyle(.plain)
-                        .padding(2.5)
-                        .frame(height: 22.5)
-                        .font(.caption)
-                        .fontWeight(.semibold)
-                        .fontDesign(.rounded)
-                        .offset(x: 5)
-                        .overlay(
-                            RoundedRectangle(cornerRadius: 12)
-                                .stroke(Color.gray.opacity(0.5), lineWidth: 1)
-                        )
-                        .onSubmit {
+                    ZStack(alignment: .trailing) {
+                        // Text Field for adding new tasks
+                        TextField("What next?", text: $textEntry)
+                            .textFieldStyle(.plain)
+                            .padding(2.5)
+                            .frame(height: 25)
+                            .font(.caption)
+                            .fontWeight(.semibold)
+                            .fontDesign(.rounded)
+                            .offset(x: 7.5)
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 12)
+                                    .stroke(Color.gray.opacity(0.4), lineWidth: 1)
+                            )
+                            .onSubmit {
+                                withAnimation {
+                                    addTask()
+                                }
+                                textEntry = ""
+                            }
+                            .background(Color.white.opacity(0.025))
+                            .cornerRadius(12)
+                        
+                        Button(action: {
                             withAnimation {
                                 addTask()
                             }
                             textEntry = ""
+                        }) {
+                            ZStack {
+                                Circle()
+                                    .fill(
+                                        Color.white.opacity(0.7)
+                                    )
+                                    .overlay(
+                                        Circle()
+                                            .stroke(Color.white.opacity(0.15), lineWidth: 1)
+                                    )
+                                    .shadow(color: .black, radius: 0.5)
+                                    .frame(width: 17.5, height: 17.5)
+                                
+                                Image(systemName: "arrow.up")
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fit)
+                                    .frame(width: 7.5)
+                                    .foregroundStyle(.black)
+                                    .fontWeight(.semibold)
+                            }
                         }
+                        .buttonStyle(.plain)
+                        .buttonBorderShape(.circle)
+                        .padding(.trailing, 3.33)
+                    }
+                    
+                    Button(action: {
+                        withAnimation {
+                            addTask()
+                        }
+                        textEntry = ""
+                    }) {
+                        ZStack(alignment: .center) {
+                            Circle()
+                                .fill(
+                                    Color.white.opacity(0.05)
+                                )
+                                .overlay(
+                                    Circle()
+                                        .stroke(Color.white.opacity(0.15), lineWidth: 1)
+                                )
+                                .shadow(color: .black, radius: 0.5)
+                                .frame(width: 22.5, height: 22.5)
+                            
+                            Image(systemName: "gear")
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(width: 15)
+                                .foregroundStyle(.white.opacity(0.5))
+                                .fontWeight(.semibold)
+                                .offset(x: 0)
+                        }
+                    }
+                    .buttonStyle(.plain)
+                    .buttonBorderShape(.circle)
+                    
                 }
                 .padding(.top, 10)
             }
-            .padding(.vertical, 10)
-            .padding(.horizontal)
+            .padding(.vertical, 7.5)
+            .padding(.horizontal, 10)
         }
         .frame(maxWidth: .infinity)
         .transition(.slide)
@@ -404,6 +479,7 @@ struct DayColumn: View {
                         .foregroundStyle(isAllCompleted ? .white.opacity(0.5) : .white)
                         .strikethrough(isAllCompleted, color: .white.opacity(0.5))
                     
+                    
                     if let date = date {
                         Text(String(date))
                             .foregroundColor(.gray)
@@ -436,7 +512,12 @@ struct DayColumn: View {
                                 .fontDesign(.rounded)
                         }
                         .frame(width: 17.5, height: 17.5)
+                        .shadow(color: .black, radius: 0.5)
                         .background(.white.opacity(0.05))
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 5)
+                                .stroke(Color.white.opacity(0.15), lineWidth: 1)
+                        )
                         .cornerRadius(5)
                     }
                     .menuStyle(.button)
@@ -472,7 +553,7 @@ struct DayColumn: View {
         //.frame(width: width)
         .frame(minWidth: 150, maxWidth: .infinity)
         .layoutPriority(1)
-        .padding(.top, 7.5)
+        .padding(.top, 0)
         .animation(.spring(), value: tasks)
         .dropDestination(for: String.self) { droppedTasks, _ in
             onDrop(droppedTasks)
