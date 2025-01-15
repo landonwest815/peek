@@ -16,7 +16,7 @@ struct PeekApp: App {
             ContentView()
                 .modelContainer(for: [TaskItem.self, UserData.self])
         } label: {
-            Image(systemName: "pencil.and.scribble")
+            Image(systemName: "eyes")
         }
         .menuBarExtraStyle(.window)
     }

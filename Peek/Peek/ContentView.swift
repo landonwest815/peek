@@ -83,8 +83,11 @@ struct ContentView: View {
             VStack(spacing: 0) {
                 
                 HStack(spacing: 10) {
-                    HStack(spacing: 2.5) {
-                        Text("PeekaDO")
+                    HStack(spacing: 10) {
+                        HStack(spacing: 5) {
+                            Image(systemName: "eyes")
+                            Text("Peek")
+                        }
                         Text("by Landon West")
                             .foregroundStyle(.gray)
                     }
