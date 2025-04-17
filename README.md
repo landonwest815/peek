@@ -6,7 +6,7 @@ Peek is a minimalist macOS menu bar application designed to help users quickly j
 
 ## 🖼️ Screenshot
 
-<img src="./assets/demo.png" height="400"/>
+<img src="./assets/demo.png" height="200"/>
 
 ## 🎯 Project Objectives
 
