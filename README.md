@@ -2,7 +2,11 @@
 
 ## 🖥️ Overview
 
-Peek is a minimalist macOS menu bar application designed to help users quickly jot down and manage tasks throughout the workweek. With just a click on the menu bar icon, users can add tasks, assign colored categories, and set importance levels, ensuring that essential to-dos are always within reach without disrupting workflow.
+Peek is a minimalist macOS menu bar application designed to help users quickly jot down and manage tasks throughout the workweek. With just a click on the menu bar icon, users can add tasks, assign colored categories, and set importance levels, ensuring that essential to-dos are always within reach without disrupting workflow.  
+
+## 🖼️ Screenshot
+
+<img src="./assets/demo.png" height="400"/>
 
 ## 🎯 Project Objectives
 
